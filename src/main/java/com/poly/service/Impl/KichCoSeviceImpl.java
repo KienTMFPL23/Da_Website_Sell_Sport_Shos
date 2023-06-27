@@ -5,6 +5,8 @@ import com.poly.entity.KichCo;
 import com.poly.repository.KichCoRepo;
 import com.poly.service.KichCoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,11 @@ public class KichCoSeviceImpl implements KichCoService {
     }
 
     @Override
+    public Page<KichCo> getListKC(Pageable pageable) {
+        return repo.findAll(pageable);
+    }
+
+    @Override
     public void addKC(KichCo kichCo) {
         Random random = new Random();
         kichCo.setMaKichCo("KC" + random.nextInt());
@@ -36,5 +43,10 @@ public class KichCoSeviceImpl implements KichCoService {
     @Override
     public KichCo getOne(UUID id) {
         return repo.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<KichCo> searchKH(String loaiSize, Integer size, Pageable pageable) {
+        return repo.search(loaiSize, size, pageable);
     }
 }

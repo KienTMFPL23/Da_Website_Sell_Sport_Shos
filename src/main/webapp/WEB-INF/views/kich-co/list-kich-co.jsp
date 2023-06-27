@@ -12,13 +12,23 @@
         <div class="col-6 col-md-6 col-sm-6">
             <a href="/kich-co/hien-thi" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
             <br>
+            <br>
+            <div class="mb-3">
+                <form:form action="/kich-co/search" modelAttribute="searchForm">
+                <form:input path="size" class="form-control"/><br>
+                <form:input path="loaisize" class="form-control"/><br>
+                <button class="btn btn-warning" type="submit">Search</button>
+            </div>
+            </form:form>
+
         </div>
         <div class="col-6 col-md-6 col-sm-6">
             <a href="/kich-co/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Add</a>
             <br>
         </div>
     </div>
-    <br>
+
+    <a href="/kich-co/sort">Sort</a>
     <br>
     <table class="table table-bordered">
         <thead class="table table-danger">
@@ -34,7 +44,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listKC}" var="kc" varStatus="i">
+        <c:forEach items="${page.content}" var="kc" varStatus="i">
             <tr>
                 <td>${i.index+1}</td>
                 <td>${kc.id}</td>
@@ -55,4 +65,14 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=0">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.number-1}"><<</a></li>
+                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.number+1}">>></a></li>
+                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.totalPages-1}">Next</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>

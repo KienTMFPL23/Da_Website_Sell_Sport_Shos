@@ -1,10 +1,7 @@
 package com.poly.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +21,7 @@ public class KichCo {
     UUID id;
     @Column(name = "Makichco")
 //    @NotBlank(message = "Không để trống")
+//    @Size(min = 5, max = 100, message = "Mã tối đa 150 kí tự")
     String maKichCo;
     @Column(name = "Size")
     @NotNull(message = "Không để trống")
