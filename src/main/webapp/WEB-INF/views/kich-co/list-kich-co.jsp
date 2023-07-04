@@ -58,8 +58,7 @@
                 <td>${kc.loaiSize}</td>
                 <td>
                     <a href="/kich-co/view-update/${kc.id}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                    <a href="/kich-co/remove/${kc.id}" class="btn btn-danger"
-                       onclick="return confirm('Bạn có chắc muốn xoá ?');"><i class="bi bi-trash3-fill"></i></a>
+
                 </td>
             </tr>
         </c:forEach>
