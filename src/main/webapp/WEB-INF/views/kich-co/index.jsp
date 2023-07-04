@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 col-md-6 col-sm-6">
-            <a href="/kich-co/hien-thi" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
+            <a href="/admin/kich-co" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
             <br>
         </div>
 

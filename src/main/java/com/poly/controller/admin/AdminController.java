@@ -24,14 +24,14 @@ public class AdminController {
     public String hienthi() {
         return "/admin/index";
     }
-    @RequestMapping("/admin/kichco")
-    public String kichcow(@ModelAttribute("kichco") KichCo kichCo, @RequestParam(defaultValue = "0") int p, Model model) {
-        List<KichCo> listKC = service.getList();
-        Pageable pageable = PageRequest.of(p, 5);
-        Page<KichCo> page = service.getListKC(pageable);
-        model.addAttribute("page", page);
-        model.addAttribute("searchForm", new KichCoController.SearchForm());
-        model.addAttribute("view","../kich-co/list-kich-co.jsp");
-        return "/admin/index";
-    }
+//    @RequestMapping("/admin/kich-co")
+//    public String kichcow(@ModelAttribute("kichco") KichCo kichCo, @RequestParam(defaultValue = "0") int p, Model model) {
+//        List<KichCo> listKC = service.getList();
+//        Pageable pageable = PageRequest.of(p, 5);
+//        Page<KichCo> page = service.getListKC(pageable);
+//        model.addAttribute("page", page);
+//        model.addAttribute("searchForm", new KichCoController.SearchForm());
+//        model.addAttribute("view","../kich-co/list-kich-co.jsp");
+//        return "/admin/index";
+//    }
 }

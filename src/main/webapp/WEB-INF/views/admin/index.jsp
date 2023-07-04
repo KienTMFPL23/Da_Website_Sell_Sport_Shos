@@ -61,8 +61,10 @@
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="#">Sản phẩm</a>
-                            <a class="nav-link" href="/admin/kichco">Kích cỡ</a>
-                            <a class="nav-link" href="/mau-sac/hien-thi">Màu sắc</a>
+
+                            <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
+                            <a class="nav-link" href="#">Màu sắc</a>
+
                             <a class="nav-link" href="#">Loại giày</a>
                             <a class="nav-link" href="#">Đế giày</a>
                             <a class="nav-link" href="#">Chất liệu</a>
