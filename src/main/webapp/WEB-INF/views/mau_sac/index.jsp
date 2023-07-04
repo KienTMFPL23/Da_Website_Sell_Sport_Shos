@@ -16,15 +16,17 @@
             <th scope="col">#</th>
             <th scope="col">Mã</th>
             <th scope="col">Tên</th>
+            <th scope="col">Trạng Thái</th>
             <th scope="col">Chức Năng</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${list.content}" var="ms" varStatus="stt">
+        <c:forEach items="${list.getContent()}" var="ms" varStatus="stt">
             <tr>
                 <td>${stt.index+1}</td>
                 <td>${ms.ma}</td>
                 <td>${ms.ten}</td>
+                <td>${ms.tt == 1?"hoạt động":"ko hoạt động"}</td>
                 <td>
                     <a href="update/${ms.id}">
                         <box-icon name='edit-alt'></box-icon>
@@ -35,11 +37,20 @@
         </c:forEach>
         </tbody>
     </table>
-    <c:forEach begin="0" end="${list.totalPages-1}" varStatus="loop">
-        <a href="/mau-sac/hien-thi?page=${loop.begin + loop.count -1}">
-            <button type="submit">${loop.begin + loop.count} </button>
-        </a>
-    </c:forEach>
+    <div>
+        <c:if test="${list.number + 1 > 1}">
+            <a href="?page=${list.number}&keyword=${param.keyword}&priceRange=${param.priceRange}">
+                Previous
+            </a>
+        </c:if>
+        <span>${list.number + 1} / ${list.totalPages}</span>
+        <c:if test="${list.number + 1 < list.totalPages}">
+            <a href="?page=${list.number + 2}&keyword=${param.keyword}&priceRange=${param.priceRange}">
+                Next
+            </a>
+        </c:if>
+    </div>
+
     <br>
 <a href="/mau-sac/hien-thi-add" class="btn btn-primary" >Thêm</a>
 
