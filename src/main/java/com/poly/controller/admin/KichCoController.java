@@ -1,4 +1,4 @@
-package com.poly.controller;
+package com.poly.controller.admin;
 
 import com.poly.entity.KichCo;
 import com.poly.service.KichCoService;
