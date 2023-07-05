@@ -32,7 +32,7 @@
     <form:form modelAttribute="searchForm">
         <div style="display: flex">
             <form:input path="keyword"></form:input>
-            <button formaction="/admin/loai-giay/list" id="but" class="btn btn-success" style="margin-left: 10px">Tìm</button>
+            <button formaction="/admin/loai-giay" id="but" class="btn btn-success" style="margin-left: 10px">Tìm</button>
         </div>
     </form:form>
     <a href="/loai-giay/form"><img src="https://cdn-icons-png.flaticon.com/512/2661/2661440.png"
