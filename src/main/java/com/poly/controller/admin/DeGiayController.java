@@ -50,7 +50,9 @@ public class DeGiayController {
         Page<DeGiay> page = deGiayRepo.findAll(pageable);
         model.addAttribute("page", page);
 
-        return "/degiay/list";
+        model.addAttribute("view", "../degiay/list.jsp");
+
+        return "/admin/index";
     }
 
     @GetMapping("/de-giay/view-add")
@@ -117,6 +119,9 @@ public class DeGiayController {
     @PostMapping("/de-giay/search")
     public String search(Model model, @RequestParam(name = "keyword") String keyword) {
         model.addAttribute("search", deGiayRepo.searchByMaAndLoaiDe("%" +keyword +"%"));
-        return "/degiay/search";
+
+        model.addAttribute("view", "../degiay/search.jsp");
+
+        return "/admin/index";
     }
 }

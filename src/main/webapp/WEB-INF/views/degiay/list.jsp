@@ -28,10 +28,10 @@
 <br>
 
 <h1 style="text-align: center">QUẢN LÝ ĐẾ GIÀY</h1>
-<a style="margin-left: 600px;" href="/de-giay/view-add" class="btn"><i class='bx bxs-add-to-queue'
+<a style="margin-left: 550px;" href="/de-giay/view-add" class="btn"><i class='bx bxs-add-to-queue'
                                                                                    style="font-size: 30px;"></i></a>
 
-<form action="/de-giay/search" method="post" style="margin-left: 900px;">
+<form action="/de-giay/search" method="post" style="margin-left: 800px;">
     <div class="row mb-3">
         <div class="col-sm-8">
             <input type="text" class="form-control" id="inputEmail3" name="keyword">
@@ -40,7 +40,6 @@
             <button type="submit" class="btn btn-success">Search</button>
         </div>
     </div>
-
 </form>
 
 <a class="btn btn-success" href="/de-giay/sort">Sort</a>
