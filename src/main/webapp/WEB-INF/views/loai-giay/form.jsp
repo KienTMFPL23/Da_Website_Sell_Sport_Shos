@@ -35,12 +35,15 @@
         text-align: center;
     }
     .btn {
+
+
+    }
+    #but{
         margin-left: 210px;
         width: 80px;
         margin-top: 30px;
         border-radius: 10px;
         background-color: #FFE8A3;
-
     }
 </style>
 <div class="container">
@@ -60,7 +63,7 @@
             <form:errors path="tentheloai"></form:errors>
             <div style="margin-left: 10px;color: red">${errorTen}</div>
             <div class="button1">
-                <button formaction="/loai-giay/add" type="submit" class="btn">SUBMIT</button>
+                <button formaction="/admin/loai-giay/add" type="submit" id="but" class="btn">SUBMIT</button>
             </div>
         </form:form>
     </div>

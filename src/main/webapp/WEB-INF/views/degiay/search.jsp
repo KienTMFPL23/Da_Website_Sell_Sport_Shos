@@ -10,6 +10,19 @@
 
 <br>
 
+<h1 style="text-align: center">QUẢN LÝ ĐẾ GIÀY</h1>
+
+<form action="/de-giay/search" method="post" style="margin-left: 800px;">
+    <div class="row mb-3">
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputEmail3" name="keyword">
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </div>
+</form>
+
 <table class="table table-striped">
     <thead>
     <tr>

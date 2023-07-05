@@ -17,11 +17,12 @@
     .row1 {
         color: white;
     }
-    .btn{
+    #but{
         background-color: #FF6969;
         border: none;
         width: 80px;
         height: 30px;
+
     }
 
 </style>
@@ -31,7 +32,7 @@
     <form:form modelAttribute="searchForm">
         <div style="display: flex">
             <form:input path="keyword"></form:input>
-            <button formaction="/loai-giay/list" class="btn btn-success" style="margin-left: 10px">Tìm</button>
+            <button formaction="/admin/loai-giay" id="but" class="btn btn-success" style="margin-left: 10px">Tìm</button>
         </div>
     </form:form>
     <a href="/loai-giay/form"><img src="https://cdn-icons-png.flaticon.com/512/2661/2661440.png"
@@ -59,10 +60,10 @@
     <div class="text-center" style="margin-left: 430px; margin-top: 30px">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="/loai-giay/list?p=0&keyword=${param.keyword}">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="/loai-giay/list?p=${page.number-1}&keyword=${param.keyword}"><<</a></li>
-                <li class="page-item"><a class="page-link" href="/loai-giay/list?p=${page.number+1}&keyword=${param.keyword}">>></a></li>
-                <li class="page-item"><a class="page-link" href="/loai-giay/list?p=${page.totalPages-1}&keyword=${param.keyword}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/loai-giay?p=0&keyword=${param.keyword}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/loai-giay?p=${page.number-1}&keyword=${param.keyword}"><<</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/loai-giay?p=${page.number+1}&keyword=${param.keyword}">>></a></li>
+                <li class="page-item"><a class="page-link" href="/admin/loai-giay?p=${page.totalPages-1}&keyword=${param.keyword}">Last</a></li>
             </ul>
         </nav>
     </div>
