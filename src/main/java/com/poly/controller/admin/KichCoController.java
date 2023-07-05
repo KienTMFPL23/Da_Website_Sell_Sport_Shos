@@ -1,4 +1,4 @@
-package com.poly.controller;
+package com.poly.controller.admin;
 
 import com.poly.entity.KichCo;
 import com.poly.service.KichCoService;
@@ -50,68 +50,82 @@ public class KichCoController {
 
     }
 
-    @RequestMapping("/kich-co/hien-thi")
+    @RequestMapping("/admin/kich-co")
     public String hienthi(@ModelAttribute("kichco") KichCo kichCo, @RequestParam(defaultValue = "0") int p, Model model) {
         List<KichCo> listKC = service.getList();
+        if (p < 0) {
+            p = 0;
+        }
         Pageable pageable = PageRequest.of(p, 5);
         Page<KichCo> page = service.getListKC(pageable);
         model.addAttribute("page", page);
         model.addAttribute("searchForm", new SearchForm());
-        return "/kich-co/list-kich-co";
+        model.addAttribute("view","../kich-co/list-kich-co.jsp");
+        return  "/admin/index";
     }
     @RequestMapping("/kich-co/search")
     public String Search(@ModelAttribute("searchForm") SearchForm searchForm, @RequestParam(defaultValue = "0") int p, Model model) {
         List<KichCo> listKC = service.getList();
+        if (p < 0) {
+            p = 0;
+        }
         Pageable pageable = PageRequest.of(p, 5);
         Page<KichCo> page = service.searchKH(searchForm.loaisize,searchForm.size,pageable);
         model.addAttribute("page", page);
-
-        return "/kich-co/list-kich-co";
+        model.addAttribute("view","../kich-co/list-kich-co.jsp");
+        return  "/admin/index";
     }
     @RequestMapping("/kich-co/sort")
     public String Sort(@ModelAttribute("searchForm") SearchForm searchForm, @RequestParam(defaultValue = "0") int p, Model model) {
+        if (p < 0) {
+            p = 0;
+        }
         Sort sort = Sort.by(Sort.Direction.ASC, "size");
         Pageable pageable = PageRequest.of(p, 5,sort);
         Page<KichCo> page = service.searchKH(searchForm.loaisize,searchForm.size,pageable);
         model.addAttribute("page", page);
-
-        return "/kich-co/list-kich-co";
+        model.addAttribute("view","../kich-co/list-kich-co.jsp");
+        return  "/admin/index";
     }
     @RequestMapping("/kich-co/view-add")
     public String viewAdd(@ModelAttribute("kichco") KichCo kichCo, Model model) {
         model.addAttribute("action", "/kich-co/add");
-        return "/kich-co/index";
+        model.addAttribute("view","../kich-co/index.jsp");
+        return  "/admin/index";
     }
 
     @RequestMapping("/kich-co/add")
     public String addKC(Model model, @Valid @ModelAttribute("kichco") KichCo kichCo, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("mess", "Lỗi! Vui lòng kiểm tra các trường trên !");
-            return "/kich-co/index";
+            model.addAttribute("view","../kich-co/index.jsp");
+            return  "/admin/index";
         }
         if (kichCo.getMaKichCo() != null) {
             model.addAttribute("messMa", "Lỗi! Vui lòng kiểm tra mã không được trùng !");
-            return "/kich-co/index";
+            model.addAttribute("view","../kich-co/index.jsp");
+            return  "/admin/index";
         }
         service.addKC(kichCo);
-        return "redirect:/kich-co/hien-thi";
+        return "redirect:/admin/kich-co";
     }
 
     @RequestMapping("/kich-co/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("kichco") KichCo kichCo, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("mess", "Lỗi! Vui lòng kiểm tra các trường trên !");
-            return "/kich-co/index";
+            model.addAttribute("view","../kich-co/index.jsp");
+            return  "/admin/index";
         }
 
         service.addKC(kichCo);
-        return "redirect:/kich-co/hien-thi";
+        return "redirect:/admin/kich-co";
     }
 
     @RequestMapping("/kich-co/remove/{id}")
     public String removeKC(@ModelAttribute("kichco") KichCo kichCo, Model model) {
         service.deleteKC(kichCo.getId());
-        return "redirect:/kich-co/hien-thi";
+        return "redirect:/admin/kich-co";
     }
 
     @RequestMapping("/kich-co/view-update/{id}")
@@ -119,7 +133,7 @@ public class KichCoController {
         KichCo co = service.getOne(id);
         model.addAttribute("action", "/kich-co/update/" + co.getId());
         model.addAttribute("kichco", co);
-
-        return "/kich-co/index";
+        model.addAttribute("view","../kich-co/index.jsp");
+        return  "/admin/index";
     }
 }

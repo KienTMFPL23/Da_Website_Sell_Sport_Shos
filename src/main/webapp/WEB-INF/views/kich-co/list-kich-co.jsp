@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 col-md-6 col-sm-6">
-            <a href="/kich-co/hien-thi" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
+            <a href="/admin/kich-co" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
             <br>
             <br>
             <div class="mb-3">
@@ -58,20 +58,19 @@
                 <td>${kc.loaiSize}</td>
                 <td>
                     <a href="/kich-co/view-update/${kc.id}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                    <a href="/kich-co/remove/${kc.id}" class="btn btn-danger"
-                       onclick="return confirm('Bạn có chắc muốn xoá ?');"><i class="bi bi-trash3-fill"></i></a>
+
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
     <div class="text-center">
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" class="text-center">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=0">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.number-1}"><<</a></li>
-                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.number+1}">>></a></li>
-                <li class="page-item"><a class="page-link" href="/kich-co/hien-thi?p=${page.totalPages-1}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/kich-co?p=0">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/kich-co?p=${page.number-1}"><<</a></li>
+                <li class="page-item"><a class="page-link" href="/admin/kich-co?p=${page.number+1}">>></a></li>
+                <li class="page-item"><a class="page-link" href="/admin/kich-co?p=${page.totalPages-1}">Next</a></li>
             </ul>
         </nav>
     </div>

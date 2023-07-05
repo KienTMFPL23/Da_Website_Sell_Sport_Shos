@@ -17,7 +17,7 @@ public interface DeGiayRepo extends JpaRepository<DeGiay, UUID> {
     @Query(value = "select d from DeGiay d where d.ma = ?1")
     DeGiay findByMa(String ma);
 
-    @Query(value = "select d from DeGiay d where d.ma LIKE :keyword or d.loaide LIKE :keyword")
+    @Query(value = "select d from DeGiay d where d.ma LIKE :keyword or d.loaide LIKE :keyword or d.mota LIKE :keyword")
     List<DeGiay> searchByMaAndLoaiDe(@Param("keyword") String keyword);
 
 }
