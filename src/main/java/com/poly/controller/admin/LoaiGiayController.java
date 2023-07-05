@@ -30,7 +30,7 @@ public class LoaiGiayController {
         String keyword = "";
     }
 
-    @RequestMapping("/loai-giay/list")
+    @RequestMapping("/admin/loai-giay")
 
     public String index(Model model, @ModelAttribute SearchForm searchForm, @RequestParam(defaultValue = "0") int p) {
         if (p < 0) {
@@ -46,10 +46,11 @@ public class LoaiGiayController {
         }
         model.addAttribute("lg", new LoaiGiay());
         model.addAttribute("searchForm", searchForm);
-        return "loai-giay/list";
+        model.addAttribute("view","../loai-giay/list.jsp");
+       return "/admin/index";
     }
 
-    @RequestMapping("/loai-giay/add")
+    @RequestMapping("/admin/loai-giay/add")
     public String save(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay, BindingResult result, Model model) {
         Boolean hasE = result.hasErrors();
         List<LoaiGiay> list = repo.findAll();
@@ -58,7 +59,6 @@ public class LoaiGiayController {
                model.addAttribute("errorMa","Ma loai giay da ton tai");
                hasE = true;
            }
-
            if (loaiGiay.getMa().length() < 5){
                model.addAttribute("errorMa","Ma loai giay nhieu hon 5 ki tu");
                hasE = true;
@@ -80,16 +80,16 @@ public class LoaiGiayController {
            }
        }
         if (hasE) {
-            System.out.println("e");
             model.addAttribute("lg", new LoaiGiay());
-            return "loai-giay/form";
+            model.addAttribute("view","../loai-giay/form.jsp");
+            return "/admin/index";
         }
         loaiGiay.setTrangthai(1);
         repo.save(loaiGiay);
-        return "redirect:/loai-giay/list";
+        return "redirect:/admin/loai-giay";
     }
 
-    @RequestMapping("/loai-giay/update/{id}")
+    @RequestMapping("/admin/loai-giay/update/{id}")
     public String update(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay,BindingResult result, Model model, @PathVariable UUID id) {
         boolean hasE = result.hasErrors();
         List<LoaiGiay> list = repo.findAll();
@@ -111,12 +111,12 @@ public class LoaiGiayController {
             }
         }
         if (hasE) {
-            System.out.println("e");
             model.addAttribute("lg", new LoaiGiay());
-            return "loai-giay/form";
+            model.addAttribute("view","../loai-giay/view-update.jsp");
+            return "/admin/index";
         }
         repo.save(loaiGiay);
-        return "redirect:/loai-giay/list";
+        return "redirect:/admin/loai-giay";
     }
 
     @RequestMapping("/loai-giay/edit/{id}")
@@ -124,12 +124,15 @@ public class LoaiGiayController {
         model.addAttribute("id", id);
         model.addAttribute("lg", repo.findById(id));
         model.addAttribute("listLG", repo.findAll());
-        return "loai-giay/view-update";
+        model.addAttribute("view","../loai-giay/view-update.jsp");
+        return "/admin/index";
+
     }
 
     @RequestMapping("/loai-giay/form")
     public String form(Model model) {
         model.addAttribute("lg", new LoaiGiay());
-        return "loai-giay/form";
+        model.addAttribute("view","../loai-giay/form.jsp");
+        return "/admin/index";
     }
 }
