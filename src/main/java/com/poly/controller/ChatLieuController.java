@@ -3,6 +3,7 @@ package com.poly.controller;
 import com.poly.entity.ChatLieu;
 import com.poly.repository.ChatLieuRepo;
 import jakarta.validation.Valid;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,43 +22,52 @@ public class ChatLieuController {
     @Autowired
     private ChatLieuRepo chatLieuRepo;
 
+    @Data
+    public static class SearchForm {
+        String keyword;
+    }
+
     @GetMapping("hien-thi")
-    public String index(@RequestParam(defaultValue = "0",name = "page")Integer number, Model model){
-        Pageable pageable = PageRequest.of(number,5);
+    public String index(@RequestParam(defaultValue = "0", name = "page") Integer page, Model model) {
+        Pageable pageable = PageRequest.of(page, 5);
         Page<ChatLieu> list = this.chatLieuRepo.findAll(pageable);
         model.addAttribute("list", list);
-        return "chat_lieu/list-chat-lieu";
+        model.addAttribute("searchForm", new SearchForm());
+        model.addAttribute("view", "../chat_lieu/list-chat-lieu.jsp");
+        return "/admin/index";
     }
+
 
     @GetMapping("view-add")
-    public String viewAdd(Model model, ChatLieu cl){
-        model.addAttribute("vm",cl);
-        model.addAttribute("action" , "/chat-lieu/add");
-        return "chat_lieu/add_update";
+    public String viewAdd(Model model, ChatLieu cl) {
+        model.addAttribute("vm", cl);
+        model.addAttribute("action", "/chat-lieu/add");
+        model.addAttribute("view", "../chat_lieu/add_update.jsp");
+        return "/admin/index";
     }
 
-    @PostMapping("add")
+    @RequestMapping("add")
     public String store(Model model,
-            @Valid @ModelAttribute("vm") ChatLieu cl,
-            BindingResult result
+                        @Valid @ModelAttribute("vm") ChatLieu cl,
+                        BindingResult result
     ) {
         if (result.hasErrors()) {
             // Báo lỗi
             return "chat_lieu/add_update";
         } else {
-
             this.chatLieuRepo.save(cl);
         }
+        model.addAttribute("view", "../chat_lieu/list-chat-lieu.jsp");
         return "redirect:/chat-lieu/hien-thi";
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable("id") ChatLieu cl, Model model)
-    {
+    public String edit(@PathVariable("id") ChatLieu cl, Model model) {
 
         model.addAttribute("vm", cl);
         model.addAttribute("action", "/chat-lieu/update/" + cl.getId());
-        return "chat_lieu/add_update";
+        model.addAttribute("view", "../chat_lieu/add_update.jsp");
+        return "/admin/index";
     }
 
     @PostMapping("update/{id}")
@@ -69,20 +79,20 @@ public class ChatLieuController {
             // Báo lỗi
             return "chat_lieu/add_update";
         } else {
-
             this.chatLieuRepo.save(cl);
         }
+        model.addAttribute("view", "../chat_lieu/list-chat-lieu.jsp");
         return "redirect:/chat-lieu/hien-thi";
     }
 
-    @GetMapping("search/{ten}")
-    public String search(@PathVariable("ten")
-                             @ModelAttribute("vm") ChatLieu cl,
-                         @RequestParam(defaultValue = "0") Integer number, Model model,
-                         @RequestParam("ten") String ten) {
-        Pageable pageable = PageRequest.of(number, 3);
-        Page<ChatLieu> list = chatLieuRepo.searchTen(ten, pageable);
+    @GetMapping("search")
+    public String search(Model model, @ModelAttribute("searchForm") SearchForm searchForm,
+                         @RequestParam(defaultValue = "0", name = "page") Integer page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<ChatLieu> list = this.chatLieuRepo.search(searchForm.keyword, pageable);
         model.addAttribute("list", list);
-        return "chat_lieu/list-chat-lieu";
+        model.addAttribute("vm", new ChatLieu());
+        model.addAttribute("view", "../chat_lieu/list-chat-lieu.jsp");
+        return "/admin/index";
     }
 }
