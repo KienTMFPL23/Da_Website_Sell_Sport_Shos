@@ -66,7 +66,7 @@
                             <a class="nav-link" href="#">Màu sắc</a>
 
                             <a class="nav-link" href="#">Loại giày</a>
-                            <a class="nav-link" href="#">Đế giày</a>
+                            <a class="nav-link" href="/admin/de-giay">Đế giày</a>
                             <a class="nav-link" href="#">Chất liệu</a>
                         </nav>
                     </div>

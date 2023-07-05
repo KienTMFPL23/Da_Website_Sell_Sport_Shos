@@ -12,7 +12,7 @@
 
 <h1 style="text-align: center">THÊM/SỬA ĐẾ GIÀY</h1>
 
-<form:form action="${action}" modelAttribute="degiay" method="post" style="margin-left: 570px; margin-top: 50px;">
+<form:form action="${action}" modelAttribute="degiay" method="post" style="margin-left: 470px; margin-top: 50px;">
 
     <div class="row mb-3">
         <div class="col-sm-3">
