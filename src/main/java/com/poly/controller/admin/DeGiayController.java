@@ -33,19 +33,20 @@ public class DeGiayController {
         return dsTrangThai;
     }
 
-    @RequestMapping("/de-giay/hien-thi")
-    public String hienthi(Model model, @ModelAttribute("degiay") DeGiay degiay, @RequestParam(defaultValue = "0") int p){
+    @RequestMapping("/admin/de-giay")
+    public String hienthi(Model model, @ModelAttribute("degiay") DeGiay degiay, @RequestParam(defaultValue = "0") int p) {
         List<DeGiay> listDe = deGiayRepo.findAll();
-        Pageable pageable = PageRequest.of(p, 5);
+        Pageable pageable = PageRequest.of(p, 7);
         Page<DeGiay> page = deGiayRepo.findAll(pageable);
         model.addAttribute("page", page);
-        return "/degiay/list";
+        model.addAttribute("view", "../degiay/list.jsp");
+        return "/admin/index";
     }
 
     @RequestMapping("/de-giay/sort")
-    public <SearchForm> String Sort( @RequestParam(defaultValue = "0") int p, Model model) {
+    public <SearchForm> String Sort(@RequestParam(defaultValue = "0") int p, Model model) {
         Sort sort = Sort.by(Sort.Direction.ASC, "loaide");
-        Pageable pageable = PageRequest.of(p, 5,sort);
+        Pageable pageable = PageRequest.of(p, 7, sort);
         Page<DeGiay> page = deGiayRepo.findAll(pageable);
         model.addAttribute("page", page);
 
@@ -53,58 +54,69 @@ public class DeGiayController {
     }
 
     @GetMapping("/de-giay/view-add")
-    public String viewAdd(Model model, @ModelAttribute("degiay") DeGiay degiay){
+    public String viewAdd(Model model, @ModelAttribute("degiay") DeGiay degiay) {
         model.addAttribute("action", "/de-giay/add");
-        return "/degiay/add";
+        model.addAttribute("view", "../degiay/add.jsp");
+
+        return "/admin/index";
     }
 
     @PostMapping("/de-giay/add")
-    public String add(Model model, @Valid @ModelAttribute("degiay") DeGiay degiay, BindingResult result){
-
+    public String add(Model model, @Valid @ModelAttribute("degiay") DeGiay degiay, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "/degiay/add";
+            model.addAttribute("view", "../degiay/add.jsp");
+
+            return "/admin/index";
         }
 
-        if (deGiayRepo.findByMa(degiay.getMa()) != null){
+        if (deGiayRepo.findByMa(degiay.getMa()) != null) {
             model.addAttribute("mess_Ma", "Lỗi! Mã không được trùng");
-            return "/degiay/add";
+            model.addAttribute("view", "../degiay/add.jsp");
+
+            return "/admin/index";
         }
 
         deGiayRepo.save(degiay);
-        return "redirect:/de-giay/hien-thi";
+        return "redirect:/admin/de-giay";
     }
 
     @GetMapping("/de-giay/view-update/{id}")
-    public String viewUpdate(Model model, @PathVariable(name="id") UUID id){
+    public String viewUpdate(Model model, @PathVariable(name = "id") UUID id) {
 
         DeGiay deGiay = deGiayRepo.findById(id).orElse(null);
         model.addAttribute("degiay", deGiay);
-        model.addAttribute("action", "/de-giay/update/" +deGiay.getId());
-        return "/degiay/add";
+        model.addAttribute("action", "/de-giay/update/" + deGiay.getId());
+        model.addAttribute("view", "../degiay/add.jsp");
+
+        return "/admin/index";
     }
 
     @PostMapping("/de-giay/update/{id}")
-    public String update(Model model,@Valid @ModelAttribute("degiay") DeGiay degiay, BindingResult result){
+    public String update(Model model, @Valid @ModelAttribute("degiay") DeGiay degiay, BindingResult result) {
         if (result.hasErrors()) {
-            return "/degiay/add";
+            model.addAttribute("view", "../degiay/add.jsp");
+
+            return "/admin/index";
         }
-        if (deGiayRepo.findByMa(degiay.getMa()) != null){
-            model.addAttribute("mess_Ma", "Lỗi! Mã không được trùng");
-            return "/degiay/add";
-        }
+//        if (deGiayRepo.findByMa(degiay.getMa()) != null) {
+//            model.addAttribute("mess_Ma", "Lỗi! Mã không được trùng");
+//            model.addAttribute("view", "../degiay/add.jsp");
+//
+//            return "/admin/index";
+//        }
         deGiayRepo.save(degiay);
-        return "redirect:/de-giay/hien-thi";
+        return "redirect:/admin/de-giay";
     }
 
     @GetMapping("/admin")
-    public String admin(){
+    public String admin() {
         return "/degiay/admin";
     }
 
     @PostMapping("/de-giay/search")
     public String search(Model model, @RequestParam(name = "keyword") String keyword) {
-        model.addAttribute("search", deGiayRepo.searchByMaAndLoaiDe(keyword));
+        model.addAttribute("search", deGiayRepo.searchByMaAndLoaiDe("%" +keyword +"%"));
         return "/degiay/search";
     }
 }
