@@ -13,5 +13,5 @@ public interface KichCoService {
     void addKC(KichCo kichCo);
     void deleteKC(UUID id);
     KichCo getOne(UUID id);
-    Page<KichCo> searchKH(String loaiSize, Integer size, Pageable pageable);
+    Page<KichCo> searchKH(String keyword, Pageable pageable);
 }

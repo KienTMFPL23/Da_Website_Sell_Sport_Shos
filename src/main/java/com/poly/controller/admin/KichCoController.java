@@ -45,8 +45,8 @@ public class KichCoController {
 
     @Data
     public static class SearchForm {
-        String loaisize;
-        Integer size;
+        String keyword;
+
 
     }
 
@@ -70,7 +70,7 @@ public class KichCoController {
             p = 0;
         }
         Pageable pageable = PageRequest.of(p, 5);
-        Page<KichCo> page = service.searchKH(searchForm.loaisize,searchForm.size,pageable);
+        Page<KichCo> page = service.searchKH(searchForm.keyword,pageable);
         model.addAttribute("page", page);
         model.addAttribute("view","../kich-co/list-kich-co.jsp");
         return  "/admin/index";
@@ -82,7 +82,7 @@ public class KichCoController {
         }
         Sort sort = Sort.by(Sort.Direction.ASC, "size");
         Pageable pageable = PageRequest.of(p, 5,sort);
-        Page<KichCo> page = service.searchKH(searchForm.loaisize,searchForm.size,pageable);
+        Page<KichCo> page = service.searchKH(searchForm.keyword,pageable);
         model.addAttribute("page", page);
         model.addAttribute("view","../kich-co/list-kich-co.jsp");
         return  "/admin/index";
