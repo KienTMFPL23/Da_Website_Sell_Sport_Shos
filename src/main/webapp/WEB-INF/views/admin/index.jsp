@@ -95,13 +95,8 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
-
-            </div>
+           <jsp:include page="${view}" />
         </main>
-        <footer class="py-4 bg-light mt-auto">
-
-        </footer>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
