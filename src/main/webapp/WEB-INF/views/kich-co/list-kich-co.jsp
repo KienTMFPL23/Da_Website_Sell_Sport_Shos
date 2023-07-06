@@ -63,7 +63,7 @@
     </table>
     <div class="text-center">
         <nav aria-label="Page navigation example" class="text-center">
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
                 <li class="page-item"><a class="page-link" href="/admin/kich-co?p=0">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="/admin/kich-co?p=${page.number-1}"><<</a></li>
                 <li class="page-item"><a class="page-link" href="/admin/kich-co?p=${page.number+1}">>></a></li>
