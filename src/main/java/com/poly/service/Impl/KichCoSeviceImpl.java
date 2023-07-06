@@ -46,7 +46,7 @@ public class KichCoSeviceImpl implements KichCoService {
     }
 
     @Override
-    public Page<KichCo> searchKH(String loaiSize, Integer size, Pageable pageable) {
-        return repo.search(loaiSize, size, pageable);
+    public Page<KichCo> searchKH(String keyword, Pageable pageable) {
+        return repo.search(keyword, pageable);
     }
 }

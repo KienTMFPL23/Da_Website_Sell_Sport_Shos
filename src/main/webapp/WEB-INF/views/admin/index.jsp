@@ -60,7 +60,7 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Sản phẩm</a>
+                            <a class="nav-link" href="/admin/san-pham">Sản phẩm</a>
 
                             <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
                             <a class="nav-link" href="#">Màu sắc</a>

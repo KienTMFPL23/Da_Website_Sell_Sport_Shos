@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import java.util.UUID;
 
 @Entity
-@Table(name = "MauSac")
+@Table(name = "Mausac")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,4 +32,5 @@ public class MauSac {
     private String ten;
     @Column(name = "TrangThai")
     private Integer tt;
+
 }
