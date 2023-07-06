@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,24 +10,31 @@
     <title>Chất liệu</title>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </head>
+<style>
+    .form{
+        margin-left: 450px;
+    }
+</style>
 
 <body>
 <div class="container">
     <div class="row">
         <div class="col-lg-11">
             <h3 style="text-align: center">Chất Liệu</h3>
+
             <button type="button" class="btn btn-primary">
                 <a href="/chat-lieu/view-add">
                     <box-icon name='book-add'></box-icon>
                 </a>
             </button>
-            <form action="/chat-lieu/search" method="get">
-                <div>
-                    <label>Tên</label>
-                    <input name="ten" />
-                </div>
-                <button type="button" class="btn btn-primary">Search</button>
-            </form>
+            <div class="form">
+                <sf:form action="/chat-lieu/search" method="get" modelAttribute="searchForm" >
+                    <div >
+                        <sf:input path="keyword" />
+                        <button class="btn btn-success" style="margin-left: 10px">Tìm</button>
+                    </div>
+                </sf:form>
+            </div>
             <table class="table table-danger">
                 <thead>
                 <tr>
@@ -57,12 +65,16 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <c:forEach begin="0" end="${list.totalPages -1}" varStatus="loop">
-
-                <a href="/chat-lieu/hien-thi?page=${loop.begin + loop.count -1}">
-                    <button type="button" class="btn btn-info">${loop.begin + loop.count }</button>
-                </a>
-            </c:forEach>
+            <div class="text-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="/chat-lieu/hien-thi?page=0&keyword=${param.keyword}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="/chat-lieu/hien-thi?page=${list.number-1}&keyword=${param.keyword}"><<</a></li>
+                        <li class="page-item"><a class="page-link" href="/chat-lieu/hien-thi?page=${list.number+1}&keyword=${param.keyword}">>></a></li>
+                        <li class="page-item"><a class="page-link" href="/chat-lieu/hien-thi?page=${list.totalPages-1}&keyword=${param.keyword}">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>

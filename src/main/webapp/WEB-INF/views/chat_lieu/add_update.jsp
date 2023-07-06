@@ -10,33 +10,56 @@
     <title>Chất liệu</title>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </head>
+<style>
+    .container{
+        text-align: center;
+        margin-top: 50px;
+    }
+    #form{
+        background-color: #FFC7C2;
+    }
+    #ma{
+        margin: 5px 5px;
+    }
+    #ten{
+        margin-bottom: 5px;
+    }
+    #tt{
+        margin-left: 10px;
+    }
+</style>
 
 <body>
+<h3 style="text-align: center">Thêm /Sửa Chất Liệu</h3>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
-            <h3 style="text-align: center">Thêm /Sửa Chất Liệu</h3>
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-5" id="form">
             <sf:form class="was-validated" method="post" modelAttribute="vm" action="${action}">
-                <div>
+                <div id="ma">
                     <label>Mã</label>
                     <sf:input path="ma" />
                     <sf:errors path="ma" />
                 </div>
-                <div>
+                <div id="ten">
                     <label>Tên</label>
                     <sf:input path="ten" />
                     <sf:errors path="ten" />
                 </div>
-                <div>
+                <div id="tt">
                     <label>Trạng Thái</label>
-                    <sf:radiobutton path="trangThai" value="1" checked="true"/>HĐ
+                    <sf:radiobutton path="trangThai" value="1" checked="true" />HĐ
                     <sf:radiobutton path="trangThai" value="0"/>Ngưng HĐ
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </sf:form>
-        </div>
+        </div><div class="col-lg-4">
+
+    </div>
     </div>
 </div>
 
