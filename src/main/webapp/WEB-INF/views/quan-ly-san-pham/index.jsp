@@ -50,7 +50,7 @@
                 <form:option value="">-----</form:option>
                 <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
             </form:select>
-            <a href="mau-sac/hien-thi-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/mau-sac/hien-thi-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
         </div>
         <div class="mb-3">
@@ -62,7 +62,7 @@
                 <form:option value="">-----</form:option>
                 <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>
             </form:select>
-            <a href="view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
         </div>
         <div class="mb-3">

@@ -42,7 +42,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public Page<QLSanPham> searchSP(String keyword, Pageable pageable) {
-        return null;
+    public Page<QLSanPham> searchSP(String keyword, Pageable pageable)
+    {
+        return searchSP(keyword,pageable);
     }
 }

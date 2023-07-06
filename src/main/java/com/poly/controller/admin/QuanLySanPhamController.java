@@ -91,6 +91,18 @@ public class QuanLySanPhamController {
      model.addAttribute("searchForm",new SearchFormSP());
         return "/admin/index";
   }
+ @RequestMapping("/quan-ly-san-pham/search")
+    public String searchSP(@ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model){
+      if (p < 0) {
+          p = 0;
+      }
+      Pageable pageable= PageRequest.of(p,5);
+      Page<QLSanPham> qlSanPhamPage=service.searchSP(searchFormSP.keyword,pageable);
+      model.addAttribute("page",qlSanPhamPage);
+      model.addAttribute("view","../quan-ly-san-pham/list-san-pham.jsp");
+     model.addAttribute("sanpham",new QLSanPham());
+        return "/admin/index";
+  }
 
   @RequestMapping("/quan-ly-san-pham/view-add")
   public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp,Model model){

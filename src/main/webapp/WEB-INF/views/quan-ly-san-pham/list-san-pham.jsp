@@ -7,17 +7,6 @@
 <br>
 <br>
 <div class="container">
-    <%--    <div class="row">--%>
-    <%--        <div class="col-6 col-md-6 col-sm-6">--%>
-    <%--            <a href="/admin/quan-ly-san-pham" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>--%>
-    <%--        </div>--%>
-    <%--        <div class="col-6 col-md-6 col-sm-6">--%>
-    <%--            <a href="/quan-ly-san-pham/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Thêm mới--%>
-    <%--                sản phẩm</a>--%>
-    <%--            </br>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
-
     <div class="mb-3">
         <form:form modelAttribute="searchForm" cssClass="text-center">
             <div class="row">
@@ -71,7 +60,7 @@
         <tr>
             <th>STT</th>
             <th>Tên sản phẩm</th>
-            <th><a href="/quan-ly-san-pham/sort">Đơn giá</a></th>
+            <th><a href="/quan-ly-san-pham/sort" style="color: black;">Đơn giá</a></th>
             <th>Số lượng</th>
             <th>Trạng Thái</th>
             <th>Hình ảnh</th>
