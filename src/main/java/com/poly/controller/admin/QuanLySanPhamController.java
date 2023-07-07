@@ -79,7 +79,7 @@ public class QuanLySanPhamController {
     List<SanPham> listSP() {
         return sanPhamRepo.findAll();
     }
-  @RequestMapping("/admin/san-pham")
+  @RequestMapping("/admin/quan-ly-san-pham")
     public String hienThiSanPham(@ModelAttribute("sanpham") QLSanPham sp, @RequestParam(defaultValue = "0") int p, Model model){
       if (p < 0) {
           p = 0;
@@ -91,22 +91,34 @@ public class QuanLySanPhamController {
      model.addAttribute("searchForm",new SearchFormSP());
         return "/admin/index";
   }
+ @RequestMapping("/quan-ly-san-pham/search")
+    public String searchSP(@ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model){
+      if (p < 0) {
+          p = 0;
+      }
+      Pageable pageable= PageRequest.of(p,5);
+      Page<QLSanPham> qlSanPhamPage=service.searchSP(searchFormSP.keyword,pageable);
+      model.addAttribute("page",qlSanPhamPage);
+      model.addAttribute("view","../quan-ly-san-pham/list-san-pham.jsp");
+     model.addAttribute("sanpham",new QLSanPham());
+        return "/admin/index";
+  }
 
-  @RequestMapping("/san-pham/view-add")
+  @RequestMapping("/quan-ly-san-pham/view-add")
   public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp,Model model){
-        model.addAttribute("action","/san-pham/add");
+        model.addAttribute("action","/quan-ly-san-pham/add");
       model.addAttribute("view","../quan-ly-san-pham/index.jsp");
       return  "/admin/index";
   }
 
-  @PostMapping("/san-pham/add")
+  @PostMapping("/quan-ly-san-pham/add")
     public String themSanPham(@ModelAttribute("sanpham") QLSanPham sp,Model model){
       System.out.println(sp.getChatLieu());
       service.addKC(sp);
-      return "redirect:/admin/san-pham";
+      return "redirect:/admin/quan-ly-san-pham";
   }
 
-    @RequestMapping("/san-pham/update/{id}")
+    @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("mess", "Lỗi! Vui lòng kiểm tra các trường trên !");
@@ -115,12 +127,12 @@ public class QuanLySanPhamController {
         }
 
         service.addKC(qlSanPham);
-        return "redirect:/admin/san-pham";
+        return "redirect:/admin/quan-ly-san-pham";
     }
-    @RequestMapping("/san-pham/view-update/{id}")
+    @RequestMapping("/quan-ly-san-pham/view-update/{id}")
     public String viewUpdate(@PathVariable("id") UUID id, Model model) {
         QLSanPham sp = service.getOne(id);
-        model.addAttribute("action", "/san-pham/update/" + sp.getId());
+        model.addAttribute("action", "/quan-ly-san-pham/update/" + sp.getId());
         model.addAttribute("sanpham", sp);
         model.addAttribute("view","../quan-ly-san-pham/index.jsp");
         return  "/admin/index";

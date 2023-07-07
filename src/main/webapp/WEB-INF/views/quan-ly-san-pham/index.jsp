@@ -7,31 +7,27 @@
 <br>
 <br>
 
-<div class="container">
+<div class="container text-center">
     <div class="row">
         <div class="col-6 col-md-6 col-sm-6">
-            <a href="/admin/san-pham" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
+            <a href="/admin/quan-ly-san-pham" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
             <br>
         </div>
 
     </div>
-    <form:form action="${action}" modelAttribute="sanpham" enctype="multipart/form-data">
+    <form:form action="${action}" modelAttribute="sanpham" cssClass="text-center">
         <form:input path="id" class="form-control" type="hidden"/>
 
         <div class="mb-3">
-<%--            <label class="form-label">Sản phẩm: </label>--%>
-<%--            <form:select path="sanpham">--%>
-<%--                <form:option value="">-----</form:option>--%>
-<%--                <form:options items="${listSP}" itemLabel="tenSP" itemValue="id"/>--%>
-<%--            </form:select>--%>
-    <a href="/san-pham/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
-    <label class="form-label">Loại giầy: </label>
+            <a href="/quan-ly-san-pham/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+
+            <label class="form-label">Loại giầy: </label>
             <form:select path="loaiGiay">
                 <form:option value="">-----</form:option>
                 <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>
             </form:select>
-           <a href="/loai-giay/form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/loai-giay/form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
         </div>
         <div class="mb-3">
             <label class="form-label">Đơn giá: </label>
@@ -54,7 +50,7 @@
                 <form:option value="">-----</form:option>
                 <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
             </form:select>
-            <a href="mau-sac/hien-thi-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/mau-sac/hien-thi-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
         </div>
         <div class="mb-3">
@@ -66,19 +62,18 @@
                 <form:option value="">-----</form:option>
                 <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>
             </form:select>
-            <a href="view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
         </div>
- <div class="mb-3">
+        <div class="mb-3">
             <label class="form-label">Hình ảnh: </label>
-            <form:input type="file"  path="hinhAnh"/>
-
+            <form:input type="file" path="hinhAnh" />
             <label class="form-label">Đế giày: </label>
             <form:select path="deGiay">
                 <form:option value="">-----</form:option>
                 <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>
             </form:select>
-     <a href="/de-giay/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a href="/de-giay/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
         </div>
 
