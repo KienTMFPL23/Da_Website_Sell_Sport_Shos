@@ -13,12 +13,6 @@
 <body>
 <div class="container">
     <h2 style="text-align: center">Thêm/Sửa sản phẩm</h2>
-    <div class="row">
-        <div class="col-6 col-md-6 col-sm-6">
-            <a href="/quan-ly-san-pham/view-add" class="btn btn-primary"><i class="bi bi-house-fill"></i>Thêm thông tin sản phẩm</a>
-            <br>
-        </div>
-    </div>
     <form:form modelAttribute="SP" method="post" action="${action}" >
         <p> <form:input path="id" type="hidden" /> </p>
         <p>Mã sản phẩm: <form:input path="maSP" class="form-control" /></p>

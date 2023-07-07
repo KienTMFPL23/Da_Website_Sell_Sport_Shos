@@ -32,6 +32,8 @@
                 <td>${sp.tenSP}</td>
                 <td>
                     <a href="/san-pham/view-update/${sp.id}" class="btn btn-danger"><i class="bi bi-pencil-square"></i>Detail</a>
+                    <a href="/quan-ly-san-pham/view-add" class="btn btn-danger"><i class="bi bi-pencil-square"></i>Quản
+                        lý thuộc tính</a>
                 </td>
             </tr>
         </c:forEach>
