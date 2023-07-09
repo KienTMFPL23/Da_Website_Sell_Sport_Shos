@@ -48,7 +48,6 @@
 </style>
 <div class="container">
     <div class="form">
-
         <form:form modelAttribute="lg">
             <h3> Thêm loại giày</h3>
             <div class="input" style="">
