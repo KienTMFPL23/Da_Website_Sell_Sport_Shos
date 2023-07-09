@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -77,13 +78,21 @@ public class QuanLySanPhamController {
 
     }
 
+
+    @Data
+    public static class SortFormSP {
+        String key;
+
+    }
     @ModelAttribute("listSP")
     List<SanPham> listSP() {
         return sanPhamRepo.findAll();
     }
 
     @RequestMapping("/admin/quan-ly-san-pham")
-    public String hienThiSanPham(@ModelAttribute("sanpham") QLSanPham sp, @RequestParam(defaultValue = "0") int p, Model model) {
+
+    public String hienThiSanPham(@ModelAttribute("sortForm") SortFormSP sortFormSP, @ModelAttribute("sanpham") QLSanPham sp, @RequestParam(defaultValue = "0") int p, Model model) {
+
         if (p < 0) {
             p = 0;
         }
@@ -120,6 +129,41 @@ public class QuanLySanPhamController {
 //      service.addKC(sp);
 //      return "redirect:/admin/quan-ly-san-pham";
 //  }
+        return "/admin/index";
+    }
+
+    @RequestMapping("/quan-ly-san-pham/search")
+    public String searchSP(@ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model) {
+        if (p < 0) {
+            p = 0;
+        }
+        Pageable pageable = PageRequest.of(p, 5);
+        Page<QLSanPham> qlSanPhamPage = service.searchSP(searchFormSP.keyword, pageable);
+        model.addAttribute("page", qlSanPhamPage);
+        model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
+        model.addAttribute("sanpham", new QLSanPham());
+        return "/admin/index";
+    }
+
+
+    @RequestMapping("/quan-ly-san-pham/sort")
+    public String sort(@ModelAttribute("sortForm") SortFormSP sortFormSP, @ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model) {
+        if (p < 0) {
+            p = 0;
+        }
+        Sort sort;
+        sort = sortFormSP.key.equals("dongia") ? Sort.by(Sort.Direction.DESC, "donGia") : Sort.by(Sort.Direction.DESC, "soLuong");
+        Pageable pageable = PageRequest.of(p, 5, sort);
+        Page<QLSanPham> qlSanPhamPage = service.getListSP(pageable);
+        model.addAttribute("page", qlSanPhamPage);
+
+        System.out.println(sortFormSP.key);
+        model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
+        model.addAttribute("sanpham", new QLSanPham());
+        return "/admin/index";
+    }
+
+
 
     @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) {
