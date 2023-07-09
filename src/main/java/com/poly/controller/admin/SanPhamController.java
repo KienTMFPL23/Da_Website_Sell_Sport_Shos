@@ -77,7 +77,7 @@ public class SanPhamController {
         dsTrangThai.put(1, "Hoạt động");
         dsTrangThai.put(0, "Ngưng Hoạt động");
         return dsTrangThai;
-
+    }
     @Getter
     @Setter
     public static class SearchForm {
