@@ -16,5 +16,5 @@ public interface ChiTietSanPhamRepo extends JpaRepository<QLSanPham, UUID> {
 //    Page<QLSanPham> searchSP(String keyword, Pageable pageable);
 
     @Query("select sp from QLSanPham sp where sp.moTaCT =?1 or ?1 is null ")
-    Page<QLSanPham> searchSP(String keyword, Pageable pageable);
+    Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
 }

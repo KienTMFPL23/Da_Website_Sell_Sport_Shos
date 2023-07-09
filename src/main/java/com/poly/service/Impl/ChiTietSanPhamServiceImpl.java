@@ -42,8 +42,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public Page<QLSanPham> searchSP(String keyword, Pageable pageable)
+    public Page<QLSanPham> searchCTSP(String keyword, Pageable pageable)
     {
-        return searchSP(keyword,pageable);
+        return repo.searchCTSP(keyword,pageable);
     }
 }
