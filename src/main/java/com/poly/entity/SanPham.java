@@ -35,4 +35,8 @@ public class SanPham {
     @Column(name = "TenSanPham")
     private String tenSP;
 
+    @Override
+    public String toString() {
+        return  tenSP;
+    }
 }

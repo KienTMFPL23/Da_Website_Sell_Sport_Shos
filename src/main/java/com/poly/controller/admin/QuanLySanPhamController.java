@@ -78,19 +78,21 @@ public class QuanLySanPhamController {
 
     }
 
+
     @Data
     public static class SortFormSP {
         String key;
 
     }
-
     @ModelAttribute("listSP")
     List<SanPham> listSP() {
         return sanPhamRepo.findAll();
     }
 
     @RequestMapping("/admin/quan-ly-san-pham")
+
     public String hienThiSanPham(@ModelAttribute("sortForm") SortFormSP sortFormSP, @ModelAttribute("sanpham") QLSanPham sp, @RequestParam(defaultValue = "0") int p, Model model) {
+
         if (p < 0) {
             p = 0;
         }
@@ -99,6 +101,34 @@ public class QuanLySanPhamController {
         model.addAttribute("page", qlSanPhamPage);
         model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
         model.addAttribute("searchForm", new SearchFormSP());
+        return "/admin/index";
+    }
+
+    @RequestMapping("/quan-ly-san-pham/search")
+    public String searchSP(@ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model) {
+        if (p < 0) {
+            p = 0;
+        }
+        Pageable pageable = PageRequest.of(p, 5);
+        Page<QLSanPham> qlSanPhamPage = service.searchSP(searchFormSP.keyword, pageable);
+        model.addAttribute("page", qlSanPhamPage);
+        model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
+        model.addAttribute("sanpham", new QLSanPham());
+        return "/admin/index";
+    }
+
+//  @RequestMapping("/quan-ly-san-pham/view-add")
+//  public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp,Model model){
+//        model.addAttribute("action","/quan-ly-san-pham/add");
+//      model.addAttribute("view","../quan-ly-san-pham/index.jsp");
+//      return  "/admin/index";
+//  }
+//
+//  @PostMapping("/quan-ly-san-pham/add")
+//    public String AddSanPham(@ModelAttribute("sanpham") QLSanPham sp,Model model){
+//      service.addKC(sp);
+//      return "redirect:/admin/quan-ly-san-pham";
+//  }
         return "/admin/index";
     }
 
@@ -133,19 +163,7 @@ public class QuanLySanPhamController {
         return "/admin/index";
     }
 
-    @RequestMapping("/quan-ly-san-pham/view-add")
-    public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp, Model model) {
-        model.addAttribute("action", "/quan-ly-san-pham/add");
-        model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
-        return "/admin/index";
-    }
 
-    @PostMapping("/quan-ly-san-pham/add")
-    public String themSanPham(@ModelAttribute("sanpham") QLSanPham sp, Model model) {
-        System.out.println(sp.getChatLieu());
-        service.addKC(sp);
-        return "redirect:/admin/quan-ly-san-pham";
-    }
 
     @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) {

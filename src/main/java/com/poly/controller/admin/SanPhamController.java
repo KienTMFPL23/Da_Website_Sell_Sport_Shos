@@ -1,6 +1,9 @@
 package com.poly.controller.admin;
 
-import com.poly.entity.SanPham;
+import com.poly.entity.*;
+import com.poly.repository.*;
+import com.poly.service.ChiTietSPService;
+import com.poly.service.KichCoService;
 import com.poly.service.SanPhamService;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -15,13 +18,65 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class SanPhamController {
     @Autowired
     SanPhamService sanPhamService;
+    @Autowired
+    ChiTietSPService service;
+
+    @Autowired
+    DeGiayRepo deGiayRepo;
+
+    @Autowired
+    ChatLieuRepo chatLieuRepo;
+    @Autowired
+    KichCoService kichCoService;
+    @Autowired
+    LoaiGiayRepo loaiGiayRepo;
+    @Autowired
+    MauSacReponsitories mauSacReponsitories;
+    @Autowired
+    SanPhamRepo sanPhamRepo;
+    @ModelAttribute("listDeGiay")
+    List<DeGiay> listDeGiay() {
+        return deGiayRepo.findAll();
+    }
+
+    @ModelAttribute("listChatLieu")
+    List<ChatLieu> listChatLieu() {
+        return chatLieuRepo.findAll();
+    }
+
+    @ModelAttribute("listKichCo")
+    List<KichCo> listKichCo() {
+        return kichCoService.getList();
+    }
+
+
+    @ModelAttribute("listMau")
+    List<MauSac> listMauSac() {
+        return mauSacReponsitories.findAll();
+    }
+
+    @ModelAttribute("listLoaiGiay")
+    List<LoaiGiay> listLoaiGiay() {
+        return loaiGiayRepo.findAll();
+    }
+
+    @ModelAttribute("listSP")
+    List<SanPham> listSP() {
+        return sanPhamRepo.findAll();
+    }
+
+    @ModelAttribute("dsTrangThai")
+    public Map<Integer, String> getDSTrangThai() {
+        Map<Integer, String> dsTrangThai = new HashMap<>();
+        dsTrangThai.put(1, "Hoạt động");
+        dsTrangThai.put(0, "Ngưng Hoạt động");
+        return dsTrangThai;
 
     @Getter
     @Setter
@@ -65,6 +120,7 @@ public class SanPhamController {
         Page<SanPham> page = sanPhamService.findALlSP(pageable);
         model.addAttribute("page", page);
         model.addAttribute("view", "../san_pham/index.jsp");
+
         return "admin/index";
     }
 
@@ -81,7 +137,8 @@ public class SanPhamController {
         SanPham product = sanPhamService.getOne(id);
         model.addAttribute("action", "/san-pham/update/" + product.getId());
         SanPham sp = sanPhamService.getOne(id);
-        model.addAttribute("SP", sp);
+        String tensp = sp.getTenSP();
+        model.addAttribute("tensp", tensp);
         return "admin/index";
     }
 
@@ -126,7 +183,27 @@ public class SanPhamController {
         SanPham sp = sanPhamService.getOne(id);
         sp.setMaSP(sanPham.getMaSP());
         sp.setTenSP(sanPham.getTenSP());
+        model.addAttribute("tensp", sp.getTenSP());
         sanPhamService.update(sp);
         return "redirect:/san-pham/hien-thi";
+    }
+
+    @RequestMapping("/quan-ly-san-pham/view-add/{id}")
+    public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp,@PathVariable("id") UUID id, Model model) {
+
+        SanPham sanPham1 = sanPhamService.getOne(id);
+        model.addAttribute("tensp", sanPham1.getTenSP());
+        model.addAttribute("action", "/quan-ly-san-pham/add/"+sanPham1.getId());
+        model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
+        return "/admin/index";
+    }
+
+    @PostMapping("/quan-ly-san-pham/add/{id}")
+    public String AddSanPham(@PathVariable("id") UUID id,@ModelAttribute("sanpham") QLSanPham sp, Model model) {
+        SanPham sanPham1 = sanPhamService.getOne(id);
+        sp.setSanPham(sanPham1);
+        model.addAttribute("tensp", sanPham1.getTenSP());
+        service.addKC(sp);
+        return "redirect:/admin/quan-ly-san-pham";
     }
 }

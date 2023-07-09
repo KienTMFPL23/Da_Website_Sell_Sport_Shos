@@ -19,6 +19,17 @@
         width: 100px;
     }
 
+    </div>
+
+    <form:form action="${action}" modelAttribute="sanpham" cssClass="text-center">
+        <form:input path="id" class="form-control" type="hidden"/>
+       <label>Tên sản phẩm:${tensp}</label>
+<%--        <form:select  path="sanPham" >--%>
+<%--            <form:option value="">-----</form:option>--%>
+<%--            <form:options items="${listSP}" itemLabel="tenSP" itemValue="id"/>--%>
+<%--        </form:select>--%>
+        <a href="/loai-giay/form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+
     .left {
         width: 45%;
         padding-left: 20px;

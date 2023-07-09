@@ -102,15 +102,15 @@
     }
 </style>
 <div class="container">
-    <div class="mb-3">
-        <form:form modelAttribute="searchForm" cssClass="text-center">
+        <form:form modelAttribute="searchForm" cssClass="text-center" >
             <div class="row">
+
                 <div class="col-6 col-md-6 col-sm-6" id="search">
                     <form:input path="keyword" class="form-control" id="inputSearch" placeholder="Tìm kiếm"/>
-                    <button class="btn btn-warning">Tìm kiếm</button>
+                     <a class="btn btn-warning" href="/quan-ly-san-pham/search">Search</a>
                 </div>
                 <div class="col-3 col-md-3 col-sm-3" id="btnAdd">
-                    <a href="/quan-ly-san-pham/view-add" \>
+                    <a href="/quan-ly-san-pham/view-add" />
 <%--                        <i class="bi bi-plus-circle-fill"></i>--%>
                         <img src="../images/plus.png">
                         Thêm mới sản phẩm</a>
@@ -118,6 +118,7 @@
                 </div>
             </div>
             </br>
+
            <div class="row-select-one">
               <div>
                   <label class="form-label">Loại giầy: </label>
@@ -157,8 +158,8 @@
                   </form:select>
               </div>
            </div>
+
         </form:form>
-    </div>
     </br>
     <form:form action="/quan-ly-san-pham/sort" modelAttribute="sortForm">
         <label class="form-label">Sắp xếp theo</label>
@@ -178,7 +179,7 @@
             <th>Trạng Thái</th>
             <th>Hình ảnh</th>
             <th>Chi tiết</th>
-            <th>Action</th>
+<%--            <th>Action</th>--%>
         </tr>
 
         <tbody>
@@ -191,11 +192,10 @@
                 <td>${sp.trangThai==1?"Hoạt động":"Không hoạt động"}</td>
                 <td>${sp.hinhAnh}</td>
                 <td>${sp.moTaCT}</td>
-                <td>
-                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i
-                            class="bi bi-pencil-square"></i></a>
-
-                </td>
+<%--                <td>--%>
+<%--                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i--%>
+<%--                            class="bi bi-pencil-square"></i></a>--%>
+<%--                </td>--%>
             </tr>
         </c:forEach>
         </tbody>

@@ -49,4 +49,8 @@ public class QLSanPham {
     @Column(name = "Trangthai")
     Integer trangThai;
 
+    @Override
+    public String toString() {
+        return  sanPham.getTenSP();
+    }
 }
