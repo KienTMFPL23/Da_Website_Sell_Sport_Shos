@@ -37,6 +37,7 @@
     </form:form>
     <a href="/loai-giay/form"><img src="https://cdn-icons-png.flaticon.com/512/2661/2661440.png"
             width="30px"></a>
+   <div> <a href="/loai-giay/sort">Sắp xếp theo tên</a></div>
     <table class="table">
         <tr class="row1" style="background-color:#FF6969 ">
             <th scope="col">STT</th>
