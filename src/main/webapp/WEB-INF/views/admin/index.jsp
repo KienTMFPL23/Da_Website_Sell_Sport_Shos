@@ -63,7 +63,7 @@
                             <a class="nav-link" href="/san-pham/hien-thi">Sản phẩm</a>
 
                             <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
-                            <a class="nav-link" href="#">Màu sắc</a>
+                            <a class="nav-link" href="/mau-sac/hien-thi">Màu sắc</a>
 
 
                             <a class="nav-link" href="/admin/loai-giay">Loại giày</a>
