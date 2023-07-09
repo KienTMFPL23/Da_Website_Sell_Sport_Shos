@@ -7,17 +7,16 @@
 <br>
 <br>
 <div class="container">
-    <div class="mb-3">
-        <form:form modelAttribute="searchForm" cssClass="text-center">
+        <form:form modelAttribute="searchForm" cssClass="text-center" >
             <div class="row">
-                <div class="col-1 col-md-1 col-sm-1">
-                    <a href="/admin/quan-ly-san-pham" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>
-                </div>
+<%--                <div class="col-1 col-md-1 col-sm-1">--%>
+<%--                    <a href="/admin/quan-ly-san-pham" class="btn btn-primary"><i class="bi bi-house-fill"></i></a>--%>
+<%--                </div>--%>
                 <div class="col-6 col-md-6 col-sm-6">
                     <form:input path="keyword" class="form-control"/>
                 </div>
                 <div class="col-2 col-md-2 col-sm-2">
-                    <button class="btn btn-warning">Search</button>
+                    <a class="btn btn-warning" href="/quan-ly-san-pham/search">Search</a>
                 </div>
                 <div class="col-3 col-md-3 col-sm-3">
                     <a href="/quan-ly-san-pham/view-add" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
@@ -27,6 +26,7 @@
                 </div>
             </div>
             </br>
+
             <label class="form-label">Loại giầy: </label>
             <form:select path="keyword">
                 <form:option value="">Tất cả</form:option>
@@ -53,7 +53,6 @@
                 <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>
             </form:select>
         </form:form>
-    </div>
     </br>
     <table class="table table-bordered">
         <thead class="table-danger">
@@ -65,7 +64,7 @@
             <th>Trạng Thái</th>
             <th>Hình ảnh</th>
             <th>Chi tiết</th>
-            <th>Action</th>
+<%--            <th>Action</th>--%>
         </tr>
         </thead>
         <tbody>
@@ -78,11 +77,10 @@
                 <td>${sp.trangThai==1?"Hoạt động":"Không hoạt động"}</td>
                 <td>${sp.hinhAnh}</td>
                 <td>${sp.moTaCT}</td>
-                <td>
-                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i
-                            class="bi bi-pencil-square"></i></a>
-
-                </td>
+<%--                <td>--%>
+<%--                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i--%>
+<%--                            class="bi bi-pencil-square"></i></a>--%>
+<%--                </td>--%>
             </tr>
         </c:forEach>
         </tbody>
