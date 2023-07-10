@@ -75,8 +75,7 @@ public class QuanLySanPhamController {
         String tenmau;
 
     }
-    @Autowired
-    LoaiGiayRepo repo;
+
 
     @Data
     public static class SortFormSP {
@@ -99,54 +98,12 @@ public class QuanLySanPhamController {
         Pageable pageable = PageRequest.of(p, 5);
         Page<QLSanPham> qlSanPhamPage = service.getListSP(pageable);
         model.addAttribute("page", qlSanPhamPage);
-        model.addAttribute("lg", new LoaiGiay());
         model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
         model.addAttribute("searchForm", new SearchFormSP());
         return "/admin/index";
     }
 
-    @RequestMapping("/admin/loai-giay/add")
-    public String save(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay, BindingResult result, Model model) {
-        Boolean hasE = result.hasErrors();
 
-        List<LoaiGiay> list = repo.findAll();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getMa().equals(loaiGiay.getMa())) {
-                model.addAttribute("errorMa", "Ma loai giay da ton tai");
-                hasE = true;
-            }
-            if (loaiGiay.getMa().length() < 5) {
-                model.addAttribute("errorMa", "Ma loai giay nhieu hon 5 ki tu");
-                hasE = true;
-            }
-            if (loaiGiay.getMa().length() > 100) {
-                model.addAttribute("errorMa", "Ma loai giay it hon 100 ki tu");
-                hasE = true;
-            }
-        }
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTentheloai().equals(loaiGiay.getTentheloai())) {
-                model.addAttribute("errorTen", "Ten loai giay da ton tai");
-                hasE = true;
-            }
-            if (loaiGiay.getTentheloai().length() > 150) {
-                model.addAttribute("errorTen", "Ten loai giay it hon 150 ki tu");
-                hasE = true;
-            }
-            if (loaiGiay.getTentheloai().length() == 0) {
-                model.addAttribute("errorTen", "Ten loai giay khong duoc bo trong");
-                hasE = true;
-            }
-        }
-        if (hasE) {
-
-            model.addAttribute("view", "../loai-giay/form.jsp");
-            return "/admin/index";
-        }
-        loaiGiay.setTrangthai(1);
-        repo.save(loaiGiay);
-        return "redirect:/admin/quan-ly-san-pham";
-    }
 //  @RequestMapping("/quan-ly-san-pham/view-add")
 //  public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp,Model model){
 //        model.addAttribute("action","/quan-ly-san-pham/add");
@@ -167,11 +124,11 @@ public class QuanLySanPhamController {
         if (p < 0) {
             p = 0;
         }
+
         Sort sort = Sort.by(Sort.Direction.ASC, "tenmau");
         Pageable pageable = PageRequest.of(p,5,sort);
         Page<QLSanPham> qlSanPhamPage = service.searchCTSP(searchFormSP.keyword, pageable);
         model.addAttribute("page", qlSanPhamPage);
-        model.addAttribute("lg", new LoaiGiay());
         model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
         model.addAttribute("sanpham", new QLSanPham());
         model.addAttribute("sortForm", new SortFormSP());
@@ -185,7 +142,6 @@ public class QuanLySanPhamController {
             p = 0;
         }
         Sort sort;
-        model.addAttribute("lg", new LoaiGiay());
         sort = sortFormSP.key.equals("dongia") ? Sort.by(Sort.Direction.DESC, "donGia") : Sort.by(Sort.Direction.DESC, "soLuong");
         Pageable pageable = PageRequest.of(p, 5, sort);
         Page<QLSanPham> qlSanPhamPage = service.getListSP(pageable);
@@ -200,7 +156,6 @@ public class QuanLySanPhamController {
 
     @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) {
-        model.addAttribute("lg", new LoaiGiay());
         if (result.hasErrors()) {
             model.addAttribute("mess", "Lỗi! Vui lòng kiểm tra các trường trên !");
             model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
@@ -213,7 +168,6 @@ public class QuanLySanPhamController {
 
     @RequestMapping("/quan-ly-san-pham/view-update/{id}")
     public String viewUpdate(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("lg", new LoaiGiay());
         QLSanPham sp = service.getOne(id);
         model.addAttribute("action", "/quan-ly-san-pham/update/" + sp.getId());
         model.addAttribute("sanpham", sp);
