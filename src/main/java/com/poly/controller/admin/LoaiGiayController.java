@@ -64,47 +64,47 @@ public class LoaiGiayController {
         return "/admin/index";
     }
 
-    @RequestMapping("/admin/loai-giay/add")
-    public String save(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay, BindingResult result, Model model) {
-        Boolean hasE = result.hasErrors();
-        List<LoaiGiay> list = repo.findAll();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getMa().equals(loaiGiay.getMa())) {
-                model.addAttribute("errorMa", "Ma loai giay da ton tai");
-                hasE = true;
-            }
-            if (loaiGiay.getMa().length() < 5) {
-                model.addAttribute("errorMa", "Ma loai giay nhieu hon 5 ki tu");
-                hasE = true;
-            }
-            if (loaiGiay.getMa().length() > 100) {
-                model.addAttribute("errorMa", "Ma loai giay it hon 100 ki tu");
-                hasE = true;
-            }
-        }
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTentheloai().equals(loaiGiay.getTentheloai())) {
-                model.addAttribute("errorTen", "Ten loai giay da ton tai");
-                hasE = true;
-            }
-            if (loaiGiay.getTentheloai().length() > 150) {
-                model.addAttribute("errorTen", "Ten loai giay it hon 150 ki tu");
-                hasE = true;
-            }
-            if (loaiGiay.getTentheloai().length() == 0) {
-                model.addAttribute("errorTen", "Ten loai giay khong duoc bo trong");
-                hasE = true;
-            }
-        }
-        if (hasE) {
-            model.addAttribute("lg", new LoaiGiay());
-            model.addAttribute("view", "../loai-giay/form.jsp");
-            return "/admin/index";
-        }
-        loaiGiay.setTrangthai(1);
-        repo.save(loaiGiay);
-        return "redirect:/admin/loai-giay";
-    }
+//    @RequestMapping("/admin/loai-giay/add")
+//    public String save(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay, BindingResult result, Model model) {
+//        Boolean hasE = result.hasErrors();
+//        List<LoaiGiay> list = repo.findAll();
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getMa().equals(loaiGiay.getMa())) {
+//                model.addAttribute("errorMa", "Ma loai giay da ton tai");
+//                hasE = true;
+//            }
+//            if (loaiGiay.getMa().length() < 5) {
+//                model.addAttribute("errorMa", "Ma loai giay nhieu hon 5 ki tu");
+//                hasE = true;
+//            }
+//            if (loaiGiay.getMa().length() > 100) {
+//                model.addAttribute("errorMa", "Ma loai giay it hon 100 ki tu");
+//                hasE = true;
+//            }
+//        }
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getTentheloai().equals(loaiGiay.getTentheloai())) {
+//                model.addAttribute("errorTen", "Ten loai giay da ton tai");
+//                hasE = true;
+//            }
+//            if (loaiGiay.getTentheloai().length() > 150) {
+//                model.addAttribute("errorTen", "Ten loai giay it hon 150 ki tu");
+//                hasE = true;
+//            }
+//            if (loaiGiay.getTentheloai().length() == 0) {
+//                model.addAttribute("errorTen", "Ten loai giay khong duoc bo trong");
+//                hasE = true;
+//            }
+//        }
+//        if (hasE) {
+//            model.addAttribute("lg", new LoaiGiay());
+//            model.addAttribute("view", "../loai-giay/form.jsp");
+//            return "/admin/index";
+//        }
+//        loaiGiay.setTrangthai(1);
+//        repo.save(loaiGiay);
+//        return "redirect:/admin/loai-giay";
+//    }
 
     @RequestMapping("/admin/loai-giay/update/{id}")
     public String update(@Valid @ModelAttribute("lg") LoaiGiay loaiGiay, BindingResult result, Model model, @PathVariable UUID id) {
