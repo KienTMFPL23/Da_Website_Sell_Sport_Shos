@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <br>
 <br>
-
 <style>
     * {
         margin: 0;
@@ -127,42 +126,26 @@
                         <form:option value="">Loại giầy</form:option>
                         <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>
                     </form:select>
-                    <a type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bi bi-plus-circle"></i>
-                    </a>
-                    <!-- Button trigger modal href="/loai-giay/form" -->
+                    <a href="/loai-giay/form"data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="/images/plus.png"></a>
+                    <!-- Button trigger modal -->
+<%--                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
+<%--                        Launch demo modal--%>
+<%--                    </button>--%>
+
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><h3> Thêm loại giày</h3></h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form:form modelAttribute="lg">
-                                        <div class="input" style="">
-                                            <p>Mã:</p> <form:input path="ma" cssClass="form-input"></form:input>
-                                        </div>
-                                        <form:errors path="ma"></form:errors>
-                                        <div style="margin-left: 10px;color: red">${errorMa}</div>
-                                        <div class="input">
-                                            <p>Loại giày:</p> <form:input path="tentheloai" cssClass="form-input"></form:input>
-
-                                        </div>
-                                        <form:errors path="tentheloai"></form:errors>
-                                        <div style="margin-left: 10px;color: red">${errorTen}</div>
-
-                                    </form:form>
+                                    ...
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button formaction="/admin/loai-giay/add" type="submit"
-                                            class="btn btn-primary">Submit
-                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
