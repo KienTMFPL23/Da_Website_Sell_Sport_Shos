@@ -63,14 +63,14 @@
                             <a class="nav-link" href="/san-pham/hien-thi">Sản phẩm</a>
 
                             <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
-                            <a class="nav-link" href="#">Màu sắc</a>
+                            <a class="nav-link" href="/mau-sac/hien-thi">Màu sắc</a>
 
 
                             <a class="nav-link" href="/admin/loai-giay">Loại giày</a>
                          
                             <a class="nav-link" href="/admin/de-giay">Đế giày</a>
 
-                            <a class="nav-link" href="#">Chất liệu</a>
+                            <a class="nav-link" href="/chat-lieu/hien-thi">Chất liệu</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

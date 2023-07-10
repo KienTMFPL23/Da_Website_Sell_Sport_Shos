@@ -24,11 +24,12 @@ public class ChatLieu {
 
     @Column(name = "MaChatLieu")
     @NotBlank(message = "không để trống")
-    @Length(min = 4, max = 100, message = "không quá 100 kí tự")
+    @Length(min = 5, message = "không dưới 5 kí tự")
+    @Length(max = 100, message = "không quá 100 kí tự")
     private String ma;
 
     @NotBlank(message = "không để trống")
-    @Length(min = 4, max = 100, message = "không quá 100 kí tự")
+    @Length(max = 100, message = "không quá 100 kí tự")
     @Column(name = "TenChatLieu")
     private String ten;
 
