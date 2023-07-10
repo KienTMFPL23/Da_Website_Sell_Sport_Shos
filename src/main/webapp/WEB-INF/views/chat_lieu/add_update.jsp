@@ -40,13 +40,13 @@
             <sf:form class="was-validated" method="post" modelAttribute="vm" action="${action}">
                 <div id="ma">
                     <label>Mã</label>
-                    <sf:input path="ma" />
-                    <sf:errors path="ma" />
+                    <sf:input path="ma" /> <br />
+                    <sf:errors path="ma" cssStyle="color: red" />
                 </div>
                 <div id="ten">
                     <label>Tên</label>
-                    <sf:input path="ten" />
-                    <sf:errors path="ten" />
+                    <sf:input path="ten" /> <br />
+                    <sf:errors path="ten" cssStyle="color: red" />
                 </div>
                 <div id="tt">
                     <label>Trạng Thái</label>

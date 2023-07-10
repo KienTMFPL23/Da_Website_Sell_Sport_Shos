@@ -21,12 +21,19 @@
     <div class="row">
         <div class="col-lg-11">
             <h3 style="text-align: center">Chất Liệu</h3>
+            <div>
+                <button type="button" class="btn btn-primary">
+                    <a href="/chat-lieu/view-add">
+                        <box-icon name='book-add'></box-icon>
+                    </a>
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <a href="/chat-lieu/sort" method="get">
+                        <box-icon name='sort-up' ></box-icon>
+                    </a>
+                </button>
+            </div>
 
-            <button type="button" class="btn btn-primary">
-                <a href="/chat-lieu/view-add">
-                    <box-icon name='book-add'></box-icon>
-                </a>
-            </button>
             <div class="form">
                 <sf:form action="/chat-lieu/search" method="get" modelAttribute="searchForm" >
                     <div >
@@ -35,8 +42,8 @@
                     </div>
                 </sf:form>
             </div>
-            <table class="table table-danger">
-                <thead>
+            <table class="table table-bordered">
+                <thead class="table table-danger">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">ID</th>

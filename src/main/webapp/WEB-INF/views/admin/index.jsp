@@ -70,7 +70,7 @@
                          
                             <a class="nav-link" href="/admin/de-giay">Đế giày</a>
 
-                            <a class="nav-link" href="#">Chất liệu</a>
+                            <a class="nav-link" href="/chat-lieu/hien-thi">Chất liệu</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
