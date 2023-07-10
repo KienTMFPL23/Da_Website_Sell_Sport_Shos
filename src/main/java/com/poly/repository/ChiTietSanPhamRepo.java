@@ -11,10 +11,35 @@ import java.util.UUID;
 
 @Repository
 public interface ChiTietSanPhamRepo extends JpaRepository<QLSanPham, UUID> {
-//@Query("select sp from QLSanPham sp where sp.loaiGiay.tentheloai like ?1 or sp.kichCo.loaiSize like ?1 or sp.chatLieu.ten like ?1 or sp.mauSac.ten like ?1 or sp.sanPham.maSP like ?1 or sp.sanPham.tenSP like ?1 or sp.deGiay.loaide like ?1 or ?1 is null group by " +
-//        "sp.loaiGiay.tentheloai, sp.kichCo.loaiSize, sp.chatLieu.ten,sp.mauSac.ten,sp.sanPham.maSP,sp.sanPham.tenSP,sp.deGiay.loaide")
-//    Page<QLSanPham> searchSP(String keyword, Pageable pageable);
 
-    @Query("select sp from QLSanPham sp where sp.moTaCT =?1 or ?1 is null ")
+    @Query(value = "SELECT sp.Id\n" +
+            "      ,IdSP,s.TenSanPham\n" +
+            "      ,IdMauSac\n" +
+            "      ,IdTheLoai\n" +
+            "      ,IdKichCo\n" +
+            "      ,IdChatLieu\n" +
+            "      ,IdDeGiay\n" +
+            "      ,DonGia\n" +
+            "      ,SoLuong\n" +
+            "      ,HinhAnh\n" +
+            "      ,MoTaCT\n" +
+            "      ,sp.TrangThai\n" +
+            "  FROM [dbo].[ChiTietSanPham]\n" +
+            "  sp join SanPham s on s.Id=sp.IdSP\n" +
+            "  join MauSac m on m.Id=sp.IdMauSac\n" +
+            "  Where s.TenSanPham like ?1 or m.TenMau like ?1 or s.MaSanPham like ?1\n" +
+            "  group by sp.Id\n" +
+            "      ,IdSP,s.TenSanPham\n" +
+            "      ,IdMauSac\n" +
+            "      ,IdTheLoai\n" +
+            "      ,IdKichCo\n" +
+            "      ,IdChatLieu\n" +
+            "      ,IdDeGiay\n" +
+            "      ,DonGia\n" +
+            "      ,SoLuong\n" +
+            "      ,HinhAnh\n" +
+            "      ,MoTaCT\n" +
+            "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
+            "\t  m.Id", nativeQuery = true)
     Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
 }

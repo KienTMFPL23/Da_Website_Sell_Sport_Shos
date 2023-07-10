@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <br>
 <br>
+
 <style>
     * {
         margin: 0;
@@ -19,16 +20,6 @@
         width: 100px;
     }
 
-    </div>
-
-    <form:form action="${action}" modelAttribute="sanpham" cssClass="text-center">
-        <form:input path="id" class="form-control" type="hidden"/>
-       <label>Tên sản phẩm:${tensp}</label>
-<%--        <form:select  path="sanPham" >--%>
-<%--            <form:option value="">-----</form:option>--%>
-<%--            <form:options items="${listSP}" itemLabel="tenSP" itemValue="id"/>--%>
-<%--        </form:select>--%>
-        <a href="/loai-giay/form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
 
     .left {
         width: 45%;
@@ -80,14 +71,16 @@
         display: flex;
         justify-content: space-between;
     }
-    .item-right select{
+
+    .item-right select {
         height: 30px;
         margin-top: 20px;
         width: 150px;
         border: none;
 
     }
-    .item-right img{
+
+    .item-right img {
         margin-top: 20px;
         margin-right: 40px;
     }
@@ -99,6 +92,11 @@
         <form:input path="id" class="form-control" type="hidden"/>
         <div class="form">
             <div class="left">
+                <div class="item inp">
+                    <label class="form-label">Tên sản phẩm: </label>
+                    <form:input path="sanPham" class="form-control" type="hidden"/>
+                    <form:input path="sanPham.tenSP" value="${tensp}" readonly="true"/>
+                </div>
                 <div class="item inp">
                     <label class="form-label">Đơn giá: </label>
                     <form:input path="donGia" cssStyle="margin-left: 50px"/>
@@ -129,21 +127,60 @@
                         <form:option value="">Loại giầy</form:option>
                         <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>
                     </form:select>
-                    <a href="/loai-giay/form" ><img src="../images/plus.png"></a>
+                    <a type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bi bi-plus-circle"></i>
+                    </a>
+                    <!-- Button trigger modal href="/loai-giay/form" -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><h3> Thêm loại giày</h3></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form:form modelAttribute="lg">
+                                        <div class="input" style="">
+                                            <p>Mã:</p> <form:input path="ma" cssClass="form-input"></form:input>
+                                        </div>
+                                        <form:errors path="ma"></form:errors>
+                                        <div style="margin-left: 10px;color: red">${errorMa}</div>
+                                        <div class="input">
+                                            <p>Loại giày:</p> <form:input path="tentheloai" cssClass="form-input"></form:input>
+
+                                        </div>
+                                        <form:errors path="tentheloai"></form:errors>
+                                        <div style="margin-left: 10px;color: red">${errorTen}</div>
+
+                                    </form:form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button formaction="/admin/loai-giay/add" type="submit"
+                                            class="btn btn-primary">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="item-right">
                     <form:select path="kichCo">
                         <form:option value="">Kích cỡ</form:option>
                         <form:options items="${listKichCo}" itemLabel="size" itemValue="id"/>
                     </form:select>
-                    <a href="/kich-co/view-add"><img src="../images/plus.png"></a>
+                    <a href="/kich-co/view-add"><img src="/images/plus.png"></a>
                 </div>
                 <div class="item-right">
                     <form:select path="mauSac">
                         <form:option value="">Màu sắc</form:option>
                         <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
                     </form:select>
-                    <a href="/mau-sac/hien-thi-add" ><img src="../images/plus.png"></a>
+                    <a href="/mau-sac/hien-thi-add"><img src="/images/plus.png"></a>
                 </div>
                 <div class="item-right">
 
@@ -151,7 +188,7 @@
                         <form:option value="">Chất liệu</form:option>
                         <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>
                     </form:select>
-                    <a href="/chat_lieu/add_update" ><img src="../images/plus.png"></i></a>
+                    <a href="/chat_lieu/add_update"><img src="/images/plus.png"/></a>
                 </div>
                 <div class="item-right">
 
@@ -159,7 +196,7 @@
                         <form:option value="">Đế giày</form:option>
                         <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>
                     </form:select>
-                    <a href="/de-giay/view-add"><img src="../images/plus.png"></a>
+                    <a href="/de-giay/view-add"><img src="/images/plus.png"></a>
                 </div>
             </div>
         </div>

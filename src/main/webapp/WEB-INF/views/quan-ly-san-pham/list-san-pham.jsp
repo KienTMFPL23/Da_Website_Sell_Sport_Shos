@@ -102,15 +102,14 @@
     }
 </style>
 <div class="container">
-        <form:form modelAttribute="searchForm" cssClass="text-center" >
+        <form:form modelAttribute="searchForm" cssClass="text-center" action="/quan-ly-san-pham/search" >
             <div class="row">
-
                 <div class="col-6 col-md-6 col-sm-6" id="search">
                     <form:input path="keyword" class="form-control" id="inputSearch" placeholder="Tìm kiếm"/>
-                     <a class="btn btn-warning" href="/quan-ly-san-pham/search">Search</a>
+                    <button class="btn btn-warning" type="submit" >Search</button>
                 </div>
                 <div class="col-3 col-md-3 col-sm-3" id="btnAdd">
-                    <a href="/quan-ly-san-pham/view-add" />
+                    <a href="/san-pham/view-add" />
 <%--                        <i class="bi bi-plus-circle-fill"></i>--%>
                         <img src="../images/plus.png">
                         Thêm mới sản phẩm</a>
@@ -119,45 +118,45 @@
             </div>
             </br>
 
-           <div class="row-select-one">
-              <div>
-                  <label class="form-label">Loại giầy: </label>
-                  <form:select path="keyword">
-                      <form:option value="">Tất cả</form:option>
-                      <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>
-                  </form:select>
-              </div>
+<%--           <div class="row-select-one">--%>
+<%--              <div>--%>
+<%--                  <label class="form-label">Loại giầy: </label>--%>
+<%--                  <form:select path="keyword" onchange="submit()">--%>
+<%--                      <form:option value="">Tất cả</form:option>--%>
+<%--                      <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>--%>
+<%--                  </form:select>--%>
+<%--              </div>--%>
                <div>
                    <label class="form-label">Màu sắc: </label>
-                   <form:select path="keyword">
+                   <form:select path="tenmau" onchange="submit()">
                        <form:option value="">Tất cả</form:option>
                        <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
                    </form:select>
                </div>
-               <div>
-                   <label class="form-label">Chất liệu: </label>
-                   <form:select path="keyword">
-                       <form:option value="">Tất cả</form:option>
-                       <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>
-                   </form:select>
-               </div>
-           </div>
-           <div class="row-select-second">
-              <div>
-                  <label class="form-label">Kích cỡ: </label>
-                  <form:select path="keyword">
-                      <form:option value="">Tất cả</form:option>
-                      <form:options items="${listKichCo}" itemLabel="size" itemValue="id"/>
-                  </form:select>
-              </div>
-              <div>
-                  <label class="form-label">Đế giày: </label>
-                  <form:select path="keyword">
-                      <form:option value="">Tất cả</form:option>
-                      <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>
-                  </form:select>
-              </div>
-           </div>
+<%--               <div>--%>
+<%--                   <label class="form-label">Chất liệu: </label>--%>
+<%--                   <form:select path="keyword" onchange="submit()">--%>
+<%--                       <form:option value="">Tất cả</form:option>--%>
+<%--                       <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>--%>
+<%--                   </form:select>--%>
+<%--               </div>--%>
+<%--           </div>--%>
+<%--           <div class="row-select-second">--%>
+<%--              <div>--%>
+<%--                  <label class="form-label">Kích cỡ: </label>--%>
+<%--                  <form:select path="keyword" onchange="submit()">--%>
+<%--                      <form:option value="">Tất cả</form:option>--%>
+<%--                      <form:options items="${listKichCo}" itemLabel="size" itemValue="id"/>--%>
+<%--                  </form:select>--%>
+<%--              </div>--%>
+<%--              <div>--%>
+<%--                  <label class="form-label">Đế giày: </label>--%>
+<%--                  <form:select path="keyword" onchange="submit()">--%>
+<%--                      <form:option value="">Tất cả</form:option>--%>
+<%--                      <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>--%>
+<%--                  </form:select>--%>
+<%--              </div>--%>
+<%--           </div>--%>
 
         </form:form>
     </br>
@@ -174,7 +173,7 @@
         <tr>
             <th>STT</th>
             <th>Tên sản phẩm</th>
-            <th><a href="/quan-ly-san-pham/sort" style="color: black;">Đơn giá</a></th>
+            <th>Đơn giá</th>
             <th>Số lượng</th>
             <th>Trạng Thái</th>
             <th>Hình ảnh</th>
@@ -192,10 +191,10 @@
                 <td>${sp.trangThai==1?"Hoạt động":"Không hoạt động"}</td>
                 <td>${sp.hinhAnh}</td>
                 <td>${sp.moTaCT}</td>
-<%--                <td>--%>
-<%--                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i--%>
-<%--                            class="bi bi-pencil-square"></i></a>--%>
-<%--                </td>--%>
+                <td>
+                    <a href="/quan-ly-san-pham/view-update/${sp.id}" class="btn btn-warning"><i
+                            class="bi bi-pencil-square"></i></a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

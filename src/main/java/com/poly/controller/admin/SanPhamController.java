@@ -193,6 +193,7 @@ public class SanPhamController {
 
         SanPham sanPham1 = sanPhamService.getOne(id);
         model.addAttribute("tensp", sanPham1.getTenSP());
+        model.addAttribute("lg", new LoaiGiay());
         model.addAttribute("action", "/quan-ly-san-pham/add/"+sanPham1.getId());
         model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
         return "/admin/index";
@@ -202,6 +203,7 @@ public class SanPhamController {
     public String AddSanPham(@PathVariable("id") UUID id,@ModelAttribute("sanpham") QLSanPham sp, Model model) {
         SanPham sanPham1 = sanPhamService.getOne(id);
         sp.setSanPham(sanPham1);
+        model.addAttribute("lg", new LoaiGiay());
         model.addAttribute("tensp", sanPham1.getTenSP());
         service.addKC(sp);
         return "redirect:/admin/quan-ly-san-pham";
