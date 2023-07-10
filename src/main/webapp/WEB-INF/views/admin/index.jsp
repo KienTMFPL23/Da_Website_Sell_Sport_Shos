@@ -14,7 +14,7 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-light">
     <!-- Navbar Brand-->
-    <img src="../images/logo.jpg" style="width: 80px; height: 80px">
+    <img src="/images/logo.jpg" style="width: 80px; height: 80px">
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
@@ -90,7 +90,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-ambulance"></i></div>
                         Quản lý đơn hàng
                     </a>
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="/ban-hang/counter">
                         <div class="sb-nav-link-icon"><i class="fas fa-cart-plus"></i></div>
                         Bán hàng tại quầy
                     </a>
@@ -100,7 +100,7 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
+            <div class="container-fluid">
                 <jsp:include page="${view}"/>
             </div>
         </main>
