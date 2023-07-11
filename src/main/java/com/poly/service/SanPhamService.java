@@ -1,13 +1,16 @@
 package com.poly.service;
 
 import com.poly.entity.SanPham;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface SanPhamService {
-    List<SanPham> findALlSP();
+    Page<SanPham> findALlSP(Pageable pageable);
+    Page<SanPham> findAllByKeyword(String keyword,Pageable pageable);
     SanPham addSP(SanPham sanPham);
     SanPham update(SanPham sanPham);
     void deleteSP(UUID id);

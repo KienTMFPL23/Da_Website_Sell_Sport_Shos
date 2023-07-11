@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.UUID;
 
@@ -25,13 +26,17 @@ public class SanPham {
     private UUID id;
 
     @Column(name = "MaSanPham")
-    @Min(value = 5,message = "Mã sản phẩm phải lớn hơn hoặc bằng 5")
-    @Max(value = 100,message = "Mã sản phẩm phải nhỏ hơn hoặc bằng 100")
+    @Length(min = 5,message = "Mã sản phẩm phải lớn hơn hoặc bằng 5")
+    @Length(max = 100,message = "Mã sản phẩm phải nhỏ hơn hoặc bằng 100")
     @NotBlank(message = "Không được để trống")
     private String maSP;
     @NotBlank(message = "Không được để trống")
-    @Max(value = 150,message = "Mã sản phẩm phải nhỏ hơn hoặc bằng 150")
+    @Length(max = 150,message = "Tên sản phẩm phải nhỏ hơn hoặc bằng 150")
     @Column(name = "TenSanPham")
     private String tenSP;
 
+    @Override
+    public String toString() {
+        return  tenSP;
+    }
 }

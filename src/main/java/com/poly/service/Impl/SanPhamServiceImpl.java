@@ -4,10 +4,11 @@ import com.poly.entity.SanPham;
 import com.poly.repository.SanPhamRepo;
 import com.poly.service.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -16,8 +17,13 @@ public class SanPhamServiceImpl implements SanPhamService {
     SanPhamRepo sanPhamRepo;
 
     @Override
-    public List<SanPham> findALlSP() {
-        return sanPhamRepo.findAll();
+    public Page<SanPham> findALlSP(Pageable pageable) {
+        return sanPhamRepo.findALlSP(pageable);
+    }
+
+    @Override
+    public Page<SanPham> findAllByKeyword(String keyword, Pageable pageable) {
+        return sanPhamRepo.findAllByKeWord(keyword,pageable);
     }
 
     @Override

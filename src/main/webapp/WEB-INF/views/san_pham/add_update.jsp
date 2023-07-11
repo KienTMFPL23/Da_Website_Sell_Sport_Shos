@@ -16,11 +16,13 @@
     <form:form modelAttribute="SP" method="post" action="${action}" >
         <p> <form:input path="id" type="hidden" /> </p>
         <p>Mã sản phẩm: <form:input path="maSP" class="form-control" /></p>
+        <p style="color: red">${erorLenghMa}</p>
         <form:errors path="maSP" cssStyle="color: red" element="div"/>
         <p style="color: red">${maspError}</p>
         <p>Tên sản phẩm: <form:input path="tenSP" class="form-control" /></p>
         <form:errors path="tenSP" cssStyle="color: red" element="div"/>
         <button class="btn btn-success" type="submit" onclick="return confirm('Xác nhận')">Submit</button>
+        <a class="btn btn-success" href="/san-pham/hien-thi">Return</a>
     </form:form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
