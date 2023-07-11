@@ -28,6 +28,7 @@
     </form>
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <p>${userLogged.username}</p>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -37,7 +38,7 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -63,14 +64,14 @@
                             <a class="nav-link" href="/admin/san-pham">Sản phẩm</a>
 
                             <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
-                            <a class="nav-link" href="#">Màu sắc</a>
+                            <a class="nav-link" href="/mau-sac/hien-thi">Màu sắc</a>
 
 
                             <a class="nav-link" href="/admin/loai-giay">Loại giày</a>
                          
                             <a class="nav-link" href="/admin/de-giay">Đế giày</a>
 
-                            <a class="nav-link" href="#">Chất liệu</a>
+                            <a class="nav-link" href="/hien-thi">Chất liệu</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
