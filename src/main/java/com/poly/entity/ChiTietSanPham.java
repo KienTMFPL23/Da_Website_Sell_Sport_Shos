@@ -9,14 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
-//@Entity
-//@Table(name = "ChiTietSanPham")
+@Entity
+@Table(name = "ChiTietSanPham")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class QLSanPham {
+public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "Id")
@@ -45,30 +44,27 @@ public class QLSanPham {
     Integer soLuong;
 
     @Column(name = "Hinhanh")
-    @Transient
-    MultipartFile hinhAnh;
+//    @Transient
+    String hinhAnh;
     @Column(name = "Motact")
     String moTaCT;
     @Column(name = "Trangthai")
     Integer trangThai;
 
-    @Override
-    public String toString() {
-        return sanPham.getTenSP();
-    }
-    public void loadFromDomainModel(ChiTietSanPham domain)
+    public void loadFromViewModel(QLSanPham vm)
     {
-        this.setHinhAnh(hinhAnh);
-        this.setChatLieu( domain.getChatLieu() );
-        this.setDeGiay( domain.getDeGiay() );
-        this.setDonGia( domain.getDonGia() );
-        this.setKichCo( domain.getKichCo() );
-        this.setSanPham( domain.getSanPham() );
-        this.setTrangThai( domain.getTrangThai() );
-        this.setMoTaCT( domain.getMoTaCT() );
-        this.setSoLuong( domain.getSoLuong() );
-        this.setLoaiGiay( domain.getLoaiGiay() );
-        this.setMauSac( domain.getMauSac() );
+        this.setHinhAnh( vm.getHinhAnh().getName());
+        this.setChatLieu( vm.getChatLieu() );
+        this.setDeGiay( vm.getDeGiay() );
+        this.setDonGia( vm.getDonGia() );
+        this.setKichCo( vm.getKichCo() );
+        this.setSanPham( vm.getSanPham() );
+        this.setTrangThai( vm.getTrangThai() );
+        this.setMoTaCT( vm.getMoTaCT() );
+        this.setSoLuong( vm.getSoLuong() );
+        this.setLoaiGiay( vm.getLoaiGiay() );
+        this.setMauSac( vm.getMauSac() );
     }
-
+    public ChiTietSanPham(SanPham sanPham, ChatLieu chatLieu, DeGiay deGiay, LoaiGiay loaiGiay, Double donGia, MultipartFile hinhAnh, KichCo kichCo, MauSac mauSac, String moTaCT, Double donGia1) {
+    }
 }
