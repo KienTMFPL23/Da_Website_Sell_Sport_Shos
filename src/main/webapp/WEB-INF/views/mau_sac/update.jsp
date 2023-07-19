@@ -21,11 +21,14 @@
                     <sf:errors path="ma" />
                 </div>
                 <br>
+
+
                 <div>
                     <label> Tên</label>
                     <sf:input path="ten"/>
                     <sf:errors path="ten" />
                 </div>
+
                 <br>
                 <sf:radiobutton path="tt" value="1"/>Còn Hoạt Động
 
