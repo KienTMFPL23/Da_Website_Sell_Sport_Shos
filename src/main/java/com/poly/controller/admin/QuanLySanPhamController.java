@@ -13,9 +13,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -68,6 +72,13 @@ public class QuanLySanPhamController {
     List<LoaiGiay> listLoaiGiay() {
         return loaiGiayRepo.findAll();
     }
+    @ModelAttribute("dsGioiTinh")
+    public Map<Boolean, String> getDsGioiTinh() {
+        Map<Boolean, String> dsGT = new HashMap<>();
+        dsGT.put(true, "Nam");
+        dsGT.put(false, "Nữ");
+        return dsGT;
+    }
 
     @Data
     public static class SearchFormSP {
@@ -75,12 +86,9 @@ public class QuanLySanPhamController {
         String tenmau;
 
     }
-
-
     @Data
     public static class SortFormSP {
         String key = "";
-
     }
 
     @ModelAttribute("listSP")
@@ -96,7 +104,7 @@ public class QuanLySanPhamController {
             p = 0;
         }
         Pageable pageable = PageRequest.of(p, 5);
-        Page<QLSanPham> qlSanPhamPage = service.getListSP(pageable);
+        Page<ChiTietSanPham> qlSanPhamPage = service.getListSP(pageable);
         model.addAttribute("page", qlSanPhamPage);
         model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
         model.addAttribute("searchForm", new SearchFormSP());
@@ -127,14 +135,13 @@ public class QuanLySanPhamController {
 
         Sort sort = Sort.by(Sort.Direction.ASC, "tenmau");
         Pageable pageable = PageRequest.of(p,5,sort);
-        Page<QLSanPham> qlSanPhamPage = service.searchCTSP(searchFormSP.keyword, pageable);
+        Page<ChiTietSanPham> qlSanPhamPage = service.searchCTSP(searchFormSP.keyword, pageable);
         model.addAttribute("page", qlSanPhamPage);
         model.addAttribute("view", "../quan-ly-san-pham/list-san-pham.jsp");
         model.addAttribute("sanpham", new QLSanPham());
         model.addAttribute("sortForm", new SortFormSP());
         return "/admin/index";
     }
-
 
     @RequestMapping("/quan-ly-san-pham/sort")
     public String sort(@ModelAttribute("sortForm") SortFormSP sortFormSP, @ModelAttribute("searchForm") SearchFormSP searchFormSP, @RequestParam(defaultValue = "0") int p, Model model) {
@@ -144,7 +151,7 @@ public class QuanLySanPhamController {
         Sort sort;
         sort = sortFormSP.key.equals("dongia") ? Sort.by(Sort.Direction.DESC, "donGia") : Sort.by(Sort.Direction.DESC, "soLuong");
         Pageable pageable = PageRequest.of(p, 5, sort);
-        Page<QLSanPham> qlSanPhamPage = service.getListSP(pageable);
+        Page<ChiTietSanPham> qlSanPhamPage = service.getListSP(pageable);
         model.addAttribute("page", qlSanPhamPage);
 
         System.out.println(sortFormSP.key);
@@ -153,22 +160,40 @@ public class QuanLySanPhamController {
         return "/admin/index";
     }
 
+    private String fileUpload="C:\\Users\\Admin\\Desktop\\Da_Website_Sell_Sport_Shos\\src\\main\\resources\\static\\image\\";
 
     @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @Valid @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) {
+        model.addAttribute("lg", new LoaiGiay());
+        model.addAttribute("vm",new ChatLieu());model.addAttribute("degiay",new DeGiay());
+        model.addAttribute("ms",new MauSac());
+        model.addAttribute("kichco", new KichCo());
         if (result.hasErrors()) {
             model.addAttribute("mess", "Lỗi! Vui lòng kiểm tra các trường trên !");
             model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
             return "/admin/index";
         }
-
-        service.addKC(qlSanPham);
+        ChiTietSanPham ctsp=service.getOne(qlSanPham.getId());
+        ctsp.loadFromViewModel(qlSanPham);
+        MultipartFile multipartFile = qlSanPham.getHinhAnh();
+        String fileName = multipartFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(qlSanPham.getHinhAnh().getBytes(), new File(this.fileUpload + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ctsp.setHinhAnh(fileName);
+        service.addKC(ctsp);
         return "redirect:/admin/quan-ly-san-pham";
     }
 
     @RequestMapping("/quan-ly-san-pham/view-update/{id}")
     public String viewUpdate(@PathVariable("id") UUID id, Model model) {
-        QLSanPham sp = service.getOne(id);
+        ChiTietSanPham sp = service.getOne(id);
+        model.addAttribute("lg", new LoaiGiay());
+        model.addAttribute("vm",new ChatLieu());model.addAttribute("degiay",new DeGiay());
+        model.addAttribute("ms",new MauSac());
+        model.addAttribute("kichco", new KichCo());
         model.addAttribute("action", "/quan-ly-san-pham/update/" + sp.getId());
         model.addAttribute("sanpham", sp);
         model.addAttribute("view", "../quan-ly-san-pham/index.jsp");
