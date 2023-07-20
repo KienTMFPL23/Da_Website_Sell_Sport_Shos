@@ -2,6 +2,7 @@ package com.poly.service;
 
 import com.poly.entity.KichCo;
 import com.poly.entity.QLSanPham;
+import com.poly.entity.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,5 +16,7 @@ public interface ChiTietSPService {
     void deleteSP(UUID id);
     QLSanPham getOne(UUID id);
     Page<QLSanPham> searchCTSP(String keyword,Pageable pageable);
-
+    Integer getSoLuongSP(UUID id);
+    QLSanPham updateCTSP(QLSanPham sanPham);
+//    QLSanPham findAllSPByKey(String key);
 }

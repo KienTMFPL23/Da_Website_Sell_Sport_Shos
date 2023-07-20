@@ -136,6 +136,7 @@ public class SanPhamController {
         model.addAttribute("view", "../san_pham/add_update.jsp");
         SanPham product = sanPhamService.getOne(id);
         model.addAttribute("action", "/san-pham/update/" + product.getId());
+        model.addAttribute("SP",product);
         SanPham sp = sanPhamService.getOne(id);
         String tensp = sp.getTenSP();
         model.addAttribute("tensp", tensp);

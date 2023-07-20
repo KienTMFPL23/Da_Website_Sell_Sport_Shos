@@ -1,6 +1,7 @@
 package com.poly.service.Impl;
 
 import com.poly.entity.QLSanPham;
+import com.poly.entity.SanPham;
 import com.poly.repository.ChiTietSanPhamRepo;
 import com.poly.service.ChiTietSPService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,23 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     {
         return repo.searchCTSP(keyword,pageable);
     }
+
+    @Override
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        QLSanPham sanPham = repo.findById(id).orElse(null);
+        soLuong = sanPham.getSoLuong();
+        return soLuong;
+    }
+
+    @Override
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+        return repo.save(sanPham);
+    }
+
+
+//    @Override
+//    public QLSanPham findAllSPByKey(String key) {
+//        return repo.findAllSPByKey(key);
+//    }
 }

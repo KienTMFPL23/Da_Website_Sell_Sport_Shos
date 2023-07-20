@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -42,4 +43,7 @@ public interface ChiTietSanPhamRepo extends JpaRepository<QLSanPham, UUID> {
             "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
             "\t  m.Id", nativeQuery = true)
     Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
+
+//    @Query("select ctsp from QLSanPham ctsp where  ctsp.sanPham.tenSP like ?1 or ctsp.sanPham.maSP ?1")
+//    QLSanPham findAllSPByKey(String keyword);
 }
