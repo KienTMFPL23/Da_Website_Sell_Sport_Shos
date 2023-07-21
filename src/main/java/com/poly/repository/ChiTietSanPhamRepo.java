@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -42,5 +43,6 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
             "      ,MoTaCT\n" +
             "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
             "\t  m.Id", nativeQuery = true)
-    Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable);
+
+    Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
 }

@@ -2,6 +2,7 @@ package com.poly.service.Impl;
 
 import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.QLSanPham;
+import com.poly.entity.SanPham;
 import com.poly.repository.ChiTietSanPhamRepo;
 import com.poly.service.ChiTietSPService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -84,4 +85,23 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     public Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable) {
         return repo.searchCTSP(keyword, pageable);
     }
+
+    @Override
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        QLSanPham sanPham = repo.findById(id).orElse(null);
+        soLuong = sanPham.getSoLuong();
+        return soLuong;
+    }
+
+    @Override
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+        return repo.save(sanPham);
+    }
+
+
+//    @Override
+//    public QLSanPham findAllSPByKey(String key) {
+//        return repo.findAllSPByKey(key);
+//    }
 }
