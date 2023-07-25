@@ -221,17 +221,7 @@
         document.getElementById('tienThua').innerHTML = change - ${sum};
         let checkMoney = change = ${sum};
     }
-
-    function getTenKhachHang() {
-        var phone = document.getElementById('phoneNumber').value;
-        <c:forEach items="${listKhachHang}" var="k">
-        if (phone === k.sdt) {
-            phone.innerHTML = k.ho + k.tendem + k.ten;
-        } else {
-            phone.innerHTML = "";
-        }
-        </c:forEach>
-    }
+    
 </script>
 </body>
 </html>
