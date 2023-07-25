@@ -1,5 +1,6 @@
 package com.poly.service;
 
+import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.KichCo;
 import com.poly.entity.QLSanPham;
 import com.poly.entity.SanPham;
@@ -10,13 +11,18 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ChiTietSPService {
-    List<QLSanPham> getList();
-    Page<QLSanPham> getListSP(Pageable pageable);
-    void addKC(QLSanPham qlSanPham);
+    List<ChiTietSanPham> getList();
+    Page<ChiTietSanPham> getListSP(Pageable pageable);
+    void addKC(ChiTietSanPham qlSanPham);
     void deleteSP(UUID id);
-    QLSanPham getOne(UUID id);
-    Page<QLSanPham> searchCTSP(String keyword,Pageable pageable);
     Integer getSoLuongSP(UUID id);
-    QLSanPham updateCTSP(QLSanPham sanPham);
+    ChiTietSanPham updateCTSP(ChiTietSanPham sanPham);
 //    QLSanPham findAllSPByKey(String key);
+    ChiTietSanPham getOne(UUID id);
+    Page<ChiTietSanPham> searchCTSP(String keyword,Pageable pageable);
+
+    List<ChiTietSanPham> filterByTenSP(String tenSP);
+    List<ChiTietSanPham> filterByMauSac(String tenMau);
+    List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
+    List<ChiTietSanPham> filterByKichCo(String size);
 }

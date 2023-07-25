@@ -1,12 +1,15 @@
 package com.poly.controller.admin;
 
-import com.poly.entity.HoaDon;
-import com.poly.entity.HoaDonChiTiet;
-import com.poly.entity.QLSanPham;
-import com.poly.entity.SanPham;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.poly.entity.*;
 import com.poly.service.ChiTietSPService;
 import com.poly.service.HoaDonChiTietService;
 import com.poly.service.HoaDonService;
+import com.poly.service.Impl.NguoiDungServiceimpl;
 import com.poly.service.SanPhamService;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -16,11 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 public class BanHangController {
@@ -38,6 +43,9 @@ public class BanHangController {
     ChiTietSPService ctspService;
 
     @Autowired
+    NguoiDungServiceimpl nguoiDungService;
+
+    @Autowired
     HttpSession session;
 
     private UUID idHoaDon = null;
@@ -45,7 +53,9 @@ public class BanHangController {
     private List<HoaDonChiTiet> dsHoaDonCT = null;
     private Double sumMoney = 0.0;
     private Integer soLuongTon = 0;
-    private QLSanPham ctsp = null;
+    private ChiTietSanPham ctsp = null;
+    private NguoiDung nguoiDung = null;
+//    private List<ChiTietSanPham> listSanPhamCT = ctspService.getList();
 
     @Getter
     @Setter
@@ -57,16 +67,19 @@ public class BanHangController {
     @GetMapping("/ban-hang/counter")
     public String hienThi(Model model) {
         model.addAttribute("view", "../ban_hang_tai_quay/ban-hang.jsp");
+        this.getTaiKhoan(model);
         List<HoaDon> listHoaDon = hoaDonService.dsHoaDon();
+        model.addAttribute("listKhachHang", nguoiDungService.findAllKhachHang());
         model.addAttribute("listSP", ctspService.getList());
+        model.addAttribute("filterCTSP",new ChiTietSanPham());
         model.addAttribute("listHoaDon", hoaDonService.dsHoaDon());
         model.addAttribute("dsHoaDonCT", dsHoaDonCT);
         model.addAttribute("hoaDon", new HoaDon());
         model.addAttribute("searchForm", new SearchForm());
         model.addAttribute("idHoaDon", idHoaDon);
         List<HoaDonChiTiet> list = hoaDonChiTietService.findAllById(idHoaDon);
-        Double sum = hoaDonChiTietService.getTotal(list);
-        model.addAttribute("sum",sum);
+        sumMoney = hoaDonChiTietService.getTotal(list);
+        model.addAttribute("sum", this.sumMoney);
         return "admin/index";
     }
 
@@ -74,13 +87,19 @@ public class BanHangController {
         HoaDon hoaDon = new HoaDon();
         Random random = new Random();
         hoaDon.setMaHD("HD" + random.nextInt(999999));
-        int sdt = random.nextInt(9999999);
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         hoaDon.setNgayTao(date);
-        hoaDon.setSoDienThoai(String.valueOf(sdt));
         hoaDon.setTrangThai(0);
         return hoaDonService.saveHoaDon(hoaDon);
+    }
+
+    private void getTaiKhoan(Model model) {
+        TaiKhoan taiKhoan = (TaiKhoan) session.getAttribute("userLogged");
+        nguoiDung = nguoiDungService.findById(taiKhoan.getId());
+        model.addAttribute("username", taiKhoan.getUsername());
+        String fullname = nguoiDung.getHo() + " " + nguoiDung.getTendem() + " " + nguoiDung.getTen();
+        model.addAttribute("fullNameStaff", fullname);
     }
 
     @RequestMapping("/ban-hang/createInvoice")
@@ -138,7 +157,7 @@ public class BanHangController {
     public String searchSanPham(Model model, @ModelAttribute("searchForm") SearchForm searchForm) {
         model.addAttribute("view", "../ban_hang_tai_quay/ban-hang.jsp");
 
-        QLSanPham sanPham = sanPhamService.findCTSPByKey("" + searchForm.keyword + "");
+        ChiTietSanPham sanPham = sanPhamService.findCTSPByKey("" + searchForm.keyword + "");
         HoaDon hoaDon = hoaDonService.findHoaDon(idHoaDon);
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         List<HoaDonChiTiet> listHoaDonCT = hoaDonChiTietService.findAllById(idHoaDon);
@@ -183,11 +202,50 @@ public class BanHangController {
             Date date = new Date(millis);
             hoaDonThanhToan.setNgayThanhToan(date);
             hoaDonThanhToan.setTenNguoiNhan(hoaDon.getTenNguoiNhan());
+            hoaDonThanhToan.setNguoiDung(nguoiDung);
             hoaDonThanhToan.setTrangThai(1);
             hoaDonService.saveHoaDon(hoaDonThanhToan);
-            this.sumMoney = 0.0;
             this.dsHoaDonCT = null;
+            this.idHoaDon = null;
         }
+        return "redirect:/ban-hang/counter";
+    }
+    @GetMapping("/ban-hang/filter-by-name")
+    public String filterSanPhamByName(Model model){
+        model.addAttribute("filter","/ban-hang/filter-by-name");
+        List<ChiTietSanPham> listSanPhamCT = ctspService.getList();
+        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
+                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
+                .collect(Collectors.toList());
+        model.addAttribute("filter",filterByName);
+        return "redirect:/ban-hang/counter";
+    }
+//    @GetMapping("/ban-hang/filte-by-mau")
+//    public String filterSanPhamByMau(Model model){
+//        List<ChiTietSanPham> filterByMau = listSanPhamCT.stream()
+//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getMauSac().getTen()))
+//                .collect(Collectors.toList());
+//        model.addAttribute("filter",filterByMau);
+//        return "redirect:/ban-hang/counter";
+//    }
+//    @GetMapping("/ban-hang/filter")
+//    public String filterSanPham(){
+//        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
+//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
+//                .collect(Collectors.toList());
+//        return "redirect:/ban-hang/counter";
+//    }
+    @RequestMapping("/ban-hang/create-invoice")
+    public String createInvoice() throws FileNotFoundException {
+        String path = "invoice.pdf";
+        PdfWriter pdfWriter = new PdfWriter(path);
+        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        pdfDocument.setDefaultPageSize(PageSize.A5);
+        Document document = new Document(pdfDocument);
+
+        document.add(new Paragraph("Hóa đơn mua hàng"));
+
+        document.close();
         return "redirect:/ban-hang/counter";
     }
 }

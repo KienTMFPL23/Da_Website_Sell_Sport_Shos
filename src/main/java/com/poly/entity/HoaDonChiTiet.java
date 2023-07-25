@@ -35,5 +35,5 @@ public class HoaDonChiTiet {
     HoaDon hoaDon;
     @ManyToOne
     @JoinColumn(name = "IdChiTietSP")
-    QLSanPham qlSanPham;
+    ChiTietSanPham qlSanPham;
 }

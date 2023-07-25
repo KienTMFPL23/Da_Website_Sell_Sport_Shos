@@ -1,5 +1,6 @@
 package com.poly.repository;
 
+import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.QLSanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ChiTietSanPhamRepo extends JpaRepository<QLSanPham, UUID> {
+public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> {
 
     @Query(value = "SELECT sp.Id\n" +
             "      ,IdSP,s.TenSanPham\n" +
@@ -42,8 +43,18 @@ public interface ChiTietSanPhamRepo extends JpaRepository<QLSanPham, UUID> {
             "      ,MoTaCT\n" +
             "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
             "\t  m.Id", nativeQuery = true)
-    Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
 
 //    @Query("select ctsp from QLSanPham ctsp where  ctsp.sanPham.tenSP like ?1 or ctsp.sanPham.maSP ?1")
 //    QLSanPham findAllSPByKey(String keyword);
+
+    Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable);
+
+    @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.sanPham.tenSP =? 1")
+    List<ChiTietSanPham> filterBySanPham(String tenSanPham);
+    @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.mauSac.ten =? 1")
+    List<ChiTietSanPham> filterByMauSac(String tenMau);
+    @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.kichCo.size =? 1")
+    List<ChiTietSanPham> filterByKichCo(String size);
+    @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.loaiGiay.tentheloai =? 1")
+    List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
 }

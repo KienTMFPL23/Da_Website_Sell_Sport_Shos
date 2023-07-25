@@ -28,6 +28,7 @@
 <%--        </div>--%>
     </form>
     <!-- Navbar-->
+    <b style="color: black">${username}</b>
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
@@ -38,7 +39,7 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -83,7 +84,7 @@
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Nhân viên</a>
+                            <a class="nav-link" href="/nguoi-dung/hien-thi/nhan-vien">Nhân viên</a>
                             <a class="nav-link" href="/admin/kichco">Khách hàng</a>
                         </nav>
                     </div>

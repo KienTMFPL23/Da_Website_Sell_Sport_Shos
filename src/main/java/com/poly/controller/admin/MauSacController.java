@@ -77,7 +77,7 @@ public class MauSacController {
     @RequestMapping("mau-sac/update")
     public String update(@Valid @ModelAttribute("ms") MauSac ms, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "mau-sac/update";
+            return "mau_sac/update";
         } else {
             this.msr.save(ms);
         }
