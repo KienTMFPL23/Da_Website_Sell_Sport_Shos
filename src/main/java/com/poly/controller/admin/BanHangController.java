@@ -235,17 +235,17 @@ public class BanHangController {
 //                .collect(Collectors.toList());
 //        return "redirect:/ban-hang/counter";
 //    }
-    @RequestMapping("/ban-hang/create-invoice")
-    public String createInvoice() throws FileNotFoundException {
-        String path = "invoice.pdf";
-        PdfWriter pdfWriter = new PdfWriter(path);
-        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-        pdfDocument.setDefaultPageSize(PageSize.A5);
-        Document document = new Document(pdfDocument);
-
-        document.add(new Paragraph("Hóa đơn mua hàng"));
-
-        document.close();
-        return "redirect:/ban-hang/counter";
-    }
+//    @RequestMapping("/ban-hang/create-invoice")
+//    public String createInvoice() throws FileNotFoundException {
+//        String path = "invoice.pdf";
+//        PdfWriter pdfWriter = new PdfWriter(path);
+//        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+//        pdfDocument.setDefaultPageSize(PageSize.A5);
+//        Document document = new Document(pdfDocument);
+//
+//        document.add(new Paragraph("Hóa đơn mua hàng"));
+//
+//        document.close();
+//        return "redirect:/ban-hang/counter";
+//    }
 }
