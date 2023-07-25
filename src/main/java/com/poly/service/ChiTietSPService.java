@@ -18,7 +18,7 @@ public interface ChiTietSPService {
 
     Integer getSoLuongSP(UUID id);
     ChiTietSanPham updateCTSP(ChiTietSanPham sanPham);
-//    QLSanPham findAllSPByKey(String key);
+
     ChiTietSanPham getOne(UUID id);
     Page<ChiTietSanPham> searchCTSP(String keyword,String tenmau,Pageable pageable);
     Page<ChiTietSanPham> searchMau(String tenmau,Pageable pageable);
@@ -28,10 +28,6 @@ public interface ChiTietSPService {
     List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
     List<ChiTietSanPham> filterByKichCo(String size);
 
-    QLSanPham getOne(UUID id);
-    Page<QLSanPham> searchCTSP(String keyword,Pageable pageable);
-    Integer getSoLuongSP(UUID id);
     QLSanPham updateCTSP(QLSanPham sanPham);
-//    QLSanPham findAllSPByKey(String key);
 
 }

@@ -81,14 +81,18 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
         return repo.filterByKichCo(size);
     }
 
+
+    @Override
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+        return null;
+    }
+
     @Override
     public Integer getSoLuongSP(UUID id) {
         Integer soLuong = 0;
         ChiTietSanPham sanPham = repo.findById(id).orElse(null);
 
-    public Integer getSoLuongSP(UUID id) {
-        Integer soLuong = 0;
-        QLSanPham sanPham = repo.findById(id).orElse(null);
+
 
         soLuong = sanPham.getSoLuong();
         return soLuong;
@@ -98,7 +102,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
 
     public ChiTietSanPham updateCTSP(ChiTietSanPham sanPham) {
 
-    public QLSanPham updateCTSP(QLSanPham sanPham) {
+
 
         return repo.save(sanPham);
     }
