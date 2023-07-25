@@ -46,7 +46,7 @@ a {
 }/* text align left */
 .txt-center {
 	text-align:center;
-/*-- W3Layouts --*/	
+/*-- W3Layouts --*/
 }/* text align center */
 .float-rt {
 	float:right;
@@ -63,16 +63,16 @@ a {
 .pos-absolute {
 	position:absolute;
 }/* Position Absolute */
-.vertical-base {	
+.vertical-base {
 	vertical-align:baseline;
 }/* vertical align baseline */
-.vertical-top {	
+.vertical-top {
 	vertical-align:top;
 }/* vertical align top */
-nav.vertical ul li {	
+nav.vertical ul li {
 	display:block;
 }/* vertical menu */
-nav.horizontal ul li {	
+nav.horizontal ul li {
 	display: inline-block;
 }/* horizontal menu */
 img {
@@ -97,7 +97,7 @@ h1.w3ls {
 	color:#fff;
 	padding:40px 0;
 	text-align:center;
-	/*-- w3layouts --*/ 
+	/*-- w3layouts --*/
 	text-transform:uppercase;
 }
 .content-w3ls {
@@ -109,7 +109,7 @@ h1.w3ls {
 .content-w3ls .content-agile1 {
     width: 50%;
     float: left;
-    background: url(../images/content.jpg) no-repeat;
+    background: url(../images/logo.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     -webkit-background-size: cover;
@@ -138,6 +138,7 @@ p.agileits2 {
 	width: 50%;
     float: left;
     padding: 25px 0 0;
+
 }
 input#firstname,input#email,input#password1,input#password2 {
 	width:300px;
@@ -147,7 +148,7 @@ input#firstname,input#email,input#password1,input#password2 {
 	font-size:17px;
 	font-weight:200;
 	background-color:transparent;
-	/*-- w3layouts --*/ 
+	/*-- w3layouts --*/
 	border-bottom:5px solid #fff;
 	border-top-color:transparent;
 	border-left-color:transparent;
@@ -163,27 +164,27 @@ input#firstname:focus,input#email:focus,input#password1:focus,input#password2:fo
 }
 input::-webkit-input-placeholder {
 color: #fff !important;
-} 
+}
 input:-moz-placeholder { /* Firefox 18- */
-color: #fff !important;  
-} 
+color: #fff !important;
+}
 input::-moz-placeholder {  /* Firefox 19+ */
-color: #fff !important;  
-} 
-input:-ms-input-placeholder {  
-color: #fff !important;  
+color: #fff !important;
+}
+input:-ms-input-placeholder {
+color: #fff !important;
 }
 input:hover::-webkit-input-placeholder {
 color: #3970b0 !important;
-} 
+}
 input:hover:-moz-placeholder { /* Firefox 18- */
-color:	#3970b0 !important;  
-} 
+color:	#3970b0 !important;
+}
 input:hover::-moz-placeholder {  /* Firefox 19+ */
-color: #3970b0 !important;  
-} 
-input:hover:-ms-input-placeholder {  
-color: #3970b0 !important;  
+color: #3970b0 !important;
+}
+input:hover:-ms-input-placeholder {
+color: #3970b0 !important;
 }
 input.register {
     width: 335px;
@@ -287,7 +288,7 @@ p.copyright a:hover {
 /*-- responsive design --*/
 @media (max-width:1600px) {
 	h2.agileits1 {
-	padding: 225px 0 15px;	
+	padding: 225px 0 15px;
 	}
 }
 
@@ -369,10 +370,12 @@ h2.agileits1 {
     width: 100%;
     padding: 25px 0 30px;
 }
+
 .content-w3ls {
     width: 65%;
 }
 }
+
 
 @media (max-width: 600px) {
 h2.agileits1 {
@@ -497,6 +500,17 @@ p.copyright {
 	margin-left: 110px;
 	margin-top: 30px;
 }
+
+.sign-in-now{
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.sign-in-now>a {
+	color: #3970b0;
+	font-size: 20px;
+}
+
 
 
 /*-- /responsive design --*/

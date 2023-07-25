@@ -31,9 +31,11 @@
     <b style="color: black">${username}</b>
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false"><i class='fas fa-user-alt'  style='font-size:24px;color: black'></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li>${userLogged.username}</li>
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                 <li>
@@ -49,7 +51,7 @@
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link" href="/kich-co/hien-thi">
+                    <a class="nav-link" href="/admin/thong-ke">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                         Thống kê
                     </a>
