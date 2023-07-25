@@ -9,7 +9,7 @@ public class ThongKecontroller {
 
     @RequestMapping("/admin/thong-ke")
     public String index(Model model){
-        model.addAttribute("view", "../thong-ke/index.jsp");
+        model.addAttribute("view", "../thong_ke/index.jsp");
         return "/admin/index";
     }
 }
