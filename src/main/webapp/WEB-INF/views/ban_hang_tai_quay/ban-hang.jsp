@@ -138,13 +138,10 @@
                                                      groupingUsed="false"></label>đ</p>
                             </div>
                             <div class="dropdown mt-3">
-                                <c:if test="">
                                     <button class="btn btn-primary">In hóa đơn</button>
                                     <button type="submit" class="btn btn-primary"
                                             onclick="return confirm('Bạn có muốn thanh toán không')">Thanh toán
                                     </button>
-                                </c:if>
-
                             </div>
                         </form:form>
                     </div>
