@@ -133,7 +133,6 @@ public class BanHangController {
         model.addAttribute("view", "../ban_hang_tai_quay/ban-hang.jsp");
         List<HoaDonChiTiet> dsHDCT = hoaDonChiTietService.findALl();
         HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietService.getOne(id);
-//        Integer soLuongTon = ctspService.getSoLuongSP(id);
         if (hoaDonChiTiet != null) {
             hoaDonChiTiet.setSoLuong(soLuong);
             hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
