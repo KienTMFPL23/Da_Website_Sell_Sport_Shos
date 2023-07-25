@@ -48,7 +48,7 @@
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link" href="/kich-co/hien-thi">
+                    <a class="nav-link" href="/admin/thong-ke">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                         Thống kê
                     </a>
