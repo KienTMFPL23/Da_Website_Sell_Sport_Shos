@@ -103,7 +103,6 @@
         </div>
         <div class="col-lg-3">
             <a href="#" id="qr-reader" class="btn btn-primary">Quét QR</a>
-            <%--            <div id="qr-reader" style="width: 600px"></div>--%>
         </div>
         <c:if test="${sum != 0}">
             <div class="col-lg-2">
@@ -221,7 +220,6 @@
         document.getElementById('tienThua').innerHTML = change - ${sum};
         let checkMoney = change = ${sum};
     }
-    
 </script>
 </body>
 </html>
