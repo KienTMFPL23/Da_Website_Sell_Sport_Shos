@@ -1,5 +1,8 @@
 package com.poly.service;
 
+
+import com.poly.entity.ChiTietSanPham;
+
 import com.poly.entity.QLSanPham;
 import com.poly.entity.SanPham;
 import org.springframework.data.domain.Page;
@@ -18,5 +21,9 @@ public interface SanPhamService {
     SanPham getOne(UUID id);
     SanPham getSP(String maSP);
     SanPham findSanPhamByKeWord(String keyword);
+
+    ChiTietSanPham findCTSPByKey(String keyword);
+
     QLSanPham findCTSPByKey(String keyword);
+
 }

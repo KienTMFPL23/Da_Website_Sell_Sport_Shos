@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class NguoiDungServiceimpl {
     @Autowired
@@ -23,5 +26,12 @@ public class NguoiDungServiceimpl {
             return ndr.searchNhanVien(key,pageable);
         }
         return ndr.findNhanVien(pageable);
+    }
+    public NguoiDung findById(UUID id){
+        NguoiDung nguoiDung = ndr.findNguoiDungById(id);
+        return nguoiDung;
+    }
+    public List<NguoiDung> findAllKhachHang(){
+        return ndr.findAllKhachHang();
     }
 }

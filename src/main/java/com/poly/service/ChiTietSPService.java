@@ -15,9 +15,22 @@ public interface ChiTietSPService {
     Page<ChiTietSanPham> getListSP(Pageable pageable);
     void addKC(ChiTietSanPham qlSanPham);
     void deleteSP(UUID id);
+
+    Integer getSoLuongSP(UUID id);
+    ChiTietSanPham updateCTSP(ChiTietSanPham sanPham);
+//    QLSanPham findAllSPByKey(String key);
+    ChiTietSanPham getOne(UUID id);
+    Page<ChiTietSanPham> searchCTSP(String keyword,Pageable pageable);
+
+    List<ChiTietSanPham> filterByTenSP(String tenSP);
+    List<ChiTietSanPham> filterByMauSac(String tenMau);
+    List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
+    List<ChiTietSanPham> filterByKichCo(String size);
+
     QLSanPham getOne(UUID id);
     Page<QLSanPham> searchCTSP(String keyword,Pageable pageable);
     Integer getSoLuongSP(UUID id);
     QLSanPham updateCTSP(QLSanPham sanPham);
 //    QLSanPham findAllSPByKey(String key);
+
 }

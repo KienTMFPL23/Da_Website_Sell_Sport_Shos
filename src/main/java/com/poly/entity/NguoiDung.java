@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -36,7 +37,7 @@ public class NguoiDung {
     private String diachi;
     @Column(name = "GioiTinh")
     private Boolean gioitinh;
-    @Column(name ="NgaySinh" )
+    @Column(name = "NgaySinh")
     private Date ngaysinh;
     @Column(name = "SoDienThoai")
     private String sdt;
@@ -44,5 +45,8 @@ public class NguoiDung {
     private String email;
     @Column(name = "TrangThai")
     private Integer tt;
+
+    @OneToMany(mappedBy = "nguoiDung")
+    private List<HoaDon> hoaDons;
 
 }

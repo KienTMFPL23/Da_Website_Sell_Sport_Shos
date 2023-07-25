@@ -42,4 +42,10 @@ public class HoaDon {
 
     @Column(name = "TrangThai")
     private Integer trangThai;
+
+
+    @ManyToOne
+    @JoinColumn(name = "IdND")
+    private NguoiDung nguoiDung;
+
 }

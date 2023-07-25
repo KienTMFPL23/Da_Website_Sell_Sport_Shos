@@ -83,7 +83,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(Model model, HttpSession session) {
         session.removeAttribute("userLogged");
-        return "redirect:/admin/dashboard";
+        return "redirect:/login";
     }
 
 

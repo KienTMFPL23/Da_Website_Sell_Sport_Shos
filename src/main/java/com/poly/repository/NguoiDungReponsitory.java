@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
+import java.util.List;
 import java.util.UUID;
 
 public interface NguoiDungReponsitory extends JpaRepository<NguoiDung, UUID> {
@@ -21,4 +22,8 @@ public interface NguoiDungReponsitory extends JpaRepository<NguoiDung, UUID> {
     Page<NguoiDung> searchkhachhang(String key , Pageable pageable);
     @Query("select nd from NguoiDung nd join nd.tk  tk where tk.role = false ")
     Page<NguoiDung> findKhachhang( Pageable pageable);
+    @Query("select nd from NguoiDung  nd where nd.tk.id = ?1")
+    NguoiDung findNguoiDungById(UUID id);
+    @Query("select  nd from NguoiDung  nd where  nd.tk.role = true")
+    List<NguoiDung> findAllKhachHang();
 }
