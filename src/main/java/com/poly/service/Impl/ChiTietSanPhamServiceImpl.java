@@ -35,42 +35,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     public Page<ChiTietSanPham> getListSP(Pageable pageable) {
         return repo.findAll(pageable);
     }
-
     @Override
     public void addKC(ChiTietSanPham qlSanPham) {
-//        String uploadRootPath = request.getServletContext().getRealPath("images");
-//        System.out.println("uploadRootPath" + uploadRootPath);
-//
-//        File uploadRootDir = new File(uploadRootPath);
-//        //create directory if it not exits
-//        if (!uploadRootDir.exists()) {
-//            uploadRootDir.mkdirs();
-//        }
-////        MultipartFile fileData = qlSanPham.getHinhAnh();
-////        String name = fileData.getOriginalFilename();
-//        String name = qlSanPham.getHinhAnh();
-//        System.out.println("client file name=" + name);
-//        if (name != null && name.length() > 0) {
-//            try {
-//                // Create the file at server
-//                File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + qlSanPham.getId()+".jpg");
-//
-//                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-//                stream.write(qlSanPham.getHinhAnh().getBytes());
-//                stream.close();
-//                //
-//                System.out.println("Write file: " + serverFile);
-//
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//        }
-//        qlSanPham.setHinhAnh(name);
         repo.save(qlSanPham);
-
     }
-
     @Override
     public void deleteSP(UUID id) {
         repo.deleteById(id);
@@ -82,11 +50,18 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable) {
-        return repo.searchCTSP(keyword, pageable);
+    public Page<ChiTietSanPham> searchCTSP(String keyword,String tenmau, Pageable pageable) {
+        return repo.searchCTSP(keyword,tenmau, pageable);
     }
 
     @Override
+
+    public Page<ChiTietSanPham> searchMau(String tenmau, Pageable pageable) {
+        return repo.searchMau(tenmau,pageable);
+    }
+
+
+
     public List<ChiTietSanPham> filterByTenSP(String tenSP) {
         return repo.filterBySanPham(tenSP);
     }
@@ -110,18 +85,22 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     public Integer getSoLuongSP(UUID id) {
         Integer soLuong = 0;
         ChiTietSanPham sanPham = repo.findById(id).orElse(null);
+
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        QLSanPham sanPham = repo.findById(id).orElse(null);
+
         soLuong = sanPham.getSoLuong();
         return soLuong;
     }
 
     @Override
+
     public ChiTietSanPham updateCTSP(ChiTietSanPham sanPham) {
+
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+
         return repo.save(sanPham);
     }
 
-
-//    @Override
-//    public QLSanPham findAllSPByKey(String key) {
-//        return repo.findAllSPByKey(key);
-//    }
 }

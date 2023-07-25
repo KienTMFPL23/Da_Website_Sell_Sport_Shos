@@ -55,15 +55,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <h1 class="w3ls">Official Signup Form</h1>
 <div class="content-w3ls">
     <div class="content-agile1">
-        <h2 class="agileits1">Official</h2>
-        <p class="agileits2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+
     </div>
     <div class="content-agile2">
 
         <p style="color: red; font-family: Raleway; font-size: 20px;text-align: center">${messageConfirmPass}</p>
-        <form:form action="/register" method="post" modelAttribute="taikhoan">
+        <form:form class="form-register" action="/register" method="post" modelAttribute="taikhoan" >
             <div class="form-control w3layouts">
                 <form:input path="username" placeholder="Username" id="firstname"/>
             </div>
@@ -87,34 +84,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 />
             </div>
 
-            <div class="radio-role">
-                <form:radiobuttons
-                        items="${dsTrangThai}"
-                        path="role"
-                />
-            </div>
 
             <p id="message"></p>
 
             <input type="submit" class="register" value="Register" onclick="confirmPassword()"/>
         </form:form>
 
-        <%--        <script type="text/javascript">--%>
-        <%--            window.onload = function () {--%>
-        <%--                document.getElementById("password1").onchange = validatePassword;--%>
-        <%--                document.getElementById("password2").onchange = validatePassword;--%>
-        <%--            };--%>
-        <%--            function validatePassword() {--%>
-        <%--                var pass2 = document.getElementById("password2").value;--%>
-        <%--                var pass1 = document.getElementById("password1").value;--%>
-        <%--                if (pass1 != pass2)--%>
-        <%--                    document--%>
-        <%--                        .getElementById("password2")--%>
-        <%--                        .setCustomValidity("Passwords Don't Match");--%>
-        <%--                else document.getElementById("password2").setCustomValidity("");--%>
-        <%--                //empty string means no validation error--%>
-        <%--            }--%>
-        <%--        </script>--%>
+
+
+        <div class="sign-in-now">
+            <a  href="/login">Sign in now</a>
+        </div>
+
         <p class="wthree w3l">Fast Signup With Your Favourite Social Profile</p>
         <ul class="social-agileinfo wthree2">
             <li>
@@ -134,26 +115,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="clear"></div>
 </div>
 
-<%--<script>--%>
-<%--    function confirmPassword() {--%>
-<%--        let password = document.getElementById("password1").value;--%>
-<%--        let confirmPassword = document.getElementById("password2").value;--%>
-<%--        console.log(password, confirmPassword);--%>
-<%--        let message = document.getElementById("message");--%>
-
-<%--        if (password.length != 0) {--%>
-<%--            if (password == confirmPassword) {--%>
-<%--                message.textContent = "Password match";--%>
-<%--                message.style.color = "white";--%>
-<%--                return "http://localhost:8080/admin/dashboard";--%>
-<%--            } else {--%>
-<%--                message.textContent = "Mật khẩu không trùng khớp";--%>
-<%--                message.style.color = "white";--%>
-<%--                return "http://localhost:8080/register";--%>
-<%--            }--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
 </body>
 </html>
 
