@@ -72,6 +72,7 @@ public class LoginController {
             return "/dang-nhap/register";
         }
 
+        taikhoan.setRole(false);
         taiKhoanRepo.save(taikhoan);
         session.setAttribute("userLogged", taikhoan);
         return "redirect:/admin/dashboard";
@@ -82,7 +83,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(Model model, HttpSession session) {
         session.removeAttribute("userLogged");
-        return "redirect:/admin/dashboard";
+        return "redirect:/login";
     }
 
 

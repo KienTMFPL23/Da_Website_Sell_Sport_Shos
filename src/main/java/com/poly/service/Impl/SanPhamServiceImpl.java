@@ -1,5 +1,9 @@
 package com.poly.service.Impl;
 
+
+import com.poly.entity.ChiTietSanPham;
+
+import com.poly.entity.QLSanPham;
 import com.poly.entity.SanPham;
 import com.poly.repository.SanPhamRepo;
 import com.poly.service.SanPhamService;
@@ -49,5 +53,18 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public SanPham getSP(String maSP) {
         return sanPhamRepo.getSanPhamByMaSP(maSP);
+    }
+
+    @Override
+    public SanPham findSanPhamByKeWord(String keyword) {
+        return sanPhamRepo.findSanPhamByKeWord(keyword);
+    }
+
+    @Override
+    public ChiTietSanPham findCTSPByKey(String keyword) {
+
+    public QLSanPham findCTSPByKey(String keyword) {
+
+        return sanPhamRepo.findCTSPByKey(keyword);
     }
 }

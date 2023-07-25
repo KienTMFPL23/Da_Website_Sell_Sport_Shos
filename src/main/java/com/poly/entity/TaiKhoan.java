@@ -29,4 +29,7 @@ public class TaiKhoan {
 
     @Column(name="Role")
     private Boolean role;
+
+    @OneToOne(mappedBy = "tk")
+    private NguoiDung nguoiDung;
 }

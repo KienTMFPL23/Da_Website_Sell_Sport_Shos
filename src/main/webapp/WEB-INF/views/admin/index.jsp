@@ -9,6 +9,7 @@
     <meta name="author" content=""/>
     <title>Sidenav Light - SB Admin</title>
     <link href="/css/dashboard.css" rel="stylesheet"/>
+    <link href="/images/logo.jpg" rel="icon"/>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -27,17 +28,20 @@
 <%--        </div>--%>
     </form>
     <!-- Navbar-->
+    <b style="color: black">${username}</b>
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+               aria-expanded="false"><i class='fas fa-user-alt'  style='font-size:24px;color: black'></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li>${userLogged.username}</li>
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -47,7 +51,7 @@
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link" href="/kich-co/hien-thi">
+                    <a class="nav-link" href="/admin/thong-ke">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                         Thống kê
                     </a>
@@ -60,7 +64,7 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/san-pham/hien-thi">Sản phẩm</a>
+                            <a class="nav-link" href="/admin/quan-ly-san-pham">Sản phẩm</a>
 
                             <a class="nav-link" href="/admin/kich-co">Kích cỡ</a>
                             <a class="nav-link" href="/mau-sac/hien-thi">Màu sắc</a>
@@ -82,7 +86,7 @@
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Nhân viên</a>
+                            <a class="nav-link" href="/nguoi-dung/hien-thi/nhan-vien">Nhân viên</a>
                             <a class="nav-link" href="/admin/kichco">Khách hàng</a>
                         </nav>
                     </div>

@@ -1,5 +1,9 @@
 package com.poly.service;
 
+
+import com.poly.entity.ChiTietSanPham;
+
+import com.poly.entity.QLSanPham;
 import com.poly.entity.SanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,4 +20,10 @@ public interface SanPhamService {
     void deleteSP(UUID id);
     SanPham getOne(UUID id);
     SanPham getSP(String maSP);
+    SanPham findSanPhamByKeWord(String keyword);
+
+    ChiTietSanPham findCTSPByKey(String keyword);
+
+    QLSanPham findCTSPByKey(String keyword);
+
 }

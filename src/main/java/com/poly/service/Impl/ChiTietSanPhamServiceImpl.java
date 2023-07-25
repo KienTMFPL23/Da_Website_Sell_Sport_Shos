@@ -2,6 +2,7 @@ package com.poly.service.Impl;
 
 import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.QLSanPham;
+import com.poly.entity.SanPham;
 import com.poly.repository.ChiTietSanPhamRepo;
 import com.poly.service.ChiTietSPService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -54,8 +55,52 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
+
     public Page<ChiTietSanPham> searchMau(String tenmau, Pageable pageable) {
         return repo.searchMau(tenmau,pageable);
+    }
+
+
+
+    public List<ChiTietSanPham> filterByTenSP(String tenSP) {
+        return repo.filterBySanPham(tenSP);
+    }
+
+    @Override
+    public List<ChiTietSanPham> filterByMauSac(String tenMau) {
+        return repo.filterByMauSac(tenMau);
+    }
+
+    @Override
+    public List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay) {
+        return repo.filterByLoaiGiay(loaiGiay);
+    }
+
+    @Override
+    public List<ChiTietSanPham> filterByKichCo(String size) {
+        return repo.filterByKichCo(size);
+    }
+
+    @Override
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        ChiTietSanPham sanPham = repo.findById(id).orElse(null);
+
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        QLSanPham sanPham = repo.findById(id).orElse(null);
+
+        soLuong = sanPham.getSoLuong();
+        return soLuong;
+    }
+
+    @Override
+
+    public ChiTietSanPham updateCTSP(ChiTietSanPham sanPham) {
+
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+
+        return repo.save(sanPham);
     }
 
 }
