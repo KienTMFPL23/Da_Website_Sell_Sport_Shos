@@ -72,6 +72,7 @@ public class LoginController {
             return "/dang-nhap/register";
         }
 
+        taikhoan.setRole(false);
         taiKhoanRepo.save(taikhoan);
         session.setAttribute("userLogged", taikhoan);
         return "redirect:/admin/dashboard";

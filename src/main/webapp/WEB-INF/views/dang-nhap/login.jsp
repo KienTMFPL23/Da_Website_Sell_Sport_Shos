@@ -51,13 +51,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <body>
-<h1 class="w3ls">Official Signup Form</h1>
+<h1 class="w3ls">Official Signin Form</h1>
 <div class="content-w3ls">
-    <div class="content-agile1">
-        <h2 class="agileits1">Official</h2>
-        <p class="agileits2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+    <div class="content-agile1" >
+
     </div>
     <div class="content-agile2">
         <form:form action="/login" method="post" modelAttribute="taikhoan">
@@ -88,23 +85,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <input type="submit" class="register" value="Login"/>
         </form:form>
-        <%--        <script type="text/javascript">--%>
-        <%--            window.onload = function () {--%>
-        <%--                document.getElementById("password1").onchange = validatePassword;--%>
-        <%--                document.getElementById("password2").onchange = validatePassword;--%>
-        <%--            };--%>
 
-        <%--            function validatePassword() {--%>
-        <%--                var pass2 = document.getElementById("password2").value;--%>
-        <%--                var pass1 = document.getElementById("password1").value;--%>
-        <%--                if (pass1 != pass2)--%>
-        <%--                    document--%>
-        <%--                        .getElementById("password2")--%>
-        <%--                        .setCustomValidity("Passwords Don't Match");--%>
-        <%--                else document.getElementById("password2").setCustomValidity("");--%>
-        <%--                //empty string means no validation error--%>
-        <%--            }--%>
-        <%--        </script>--%>
 
 
         <p class="wthree w3l">Fast Signup With Your Favourite Social Profile</p>
