@@ -20,7 +20,8 @@ public interface ChiTietSPService {
     ChiTietSanPham updateCTSP(ChiTietSanPham sanPham);
 //    QLSanPham findAllSPByKey(String key);
     ChiTietSanPham getOne(UUID id);
-    Page<ChiTietSanPham> searchCTSP(String keyword,Pageable pageable);
+    Page<ChiTietSanPham> searchCTSP(String keyword,String tenmau,Pageable pageable);
+    Page<ChiTietSanPham> searchMau(String tenmau,Pageable pageable);
 
     List<ChiTietSanPham> filterByTenSP(String tenSP);
     List<ChiTietSanPham> filterByMauSac(String tenMau);

@@ -95,6 +95,7 @@
                     <label class="form-label">Tên sản phẩm: </label>
                     <form:input path="sanPham" class="form-control" type="hidden"/>
                     <form:input path="sanPham.tenSP" value="${tensp}" readonly="true"/>
+<%--                    <form:input path="id"  id="qrText" readonly="true"/>--%>
                 </div>
                 <div class="item inp">
                     <label class="form-label">Đơn giá: </label>
@@ -112,13 +113,12 @@
                 <div class="item img">
                     <label class="form-label">Hình ảnh: </label>
                     <form:input type="file" path="hinhAnh" cssStyle="margin-left: 43px"/>
-<%--                    <img src="/getimage/${photo}"/>--%>
+                    <img src="/src/main/resources/static/image/${photo}"/>
                 </div>
                 <div class="ite" style="margin-top: 20px">
                     <label class="form-label" style="color: #FB6D60;margin-right: 20px">Trạng Thái</label>
                     <form:radiobuttons items="${dsTrangThai}" path="trangThai" class="form-check-input"
                                        cssStyle="margin-right: 15px;margin-left: 20px;"/>
-                    <form:errors path="trangThai" cssStyle="color: crimson"/>
                 </div>
             </div>
             <div class="right ">
@@ -129,7 +129,9 @@
                     </form:select>
                     <a data-bs-toggle="modal" data-bs-target="#exampleModal"><img
                             src="/images/plus.png"></a>
+
                 </div>
+
                 <div class="item-right">
                     <form:select path="kichCo">
                         <form:option value="">Kích cỡ</form:option>
@@ -169,7 +171,7 @@
         </div>
         <div class="text-center" style="padding-bottom: 20px">
             <button type="submit" id="but" class="btn btn-success"
-                    onclick="return confirm('Bạn có chắc muốn thực hiện ?');">
+                  onclick="return confirm('Bạn có chắc muốn thực hiện ?');">
                 Submit
             </button>
         </div>
@@ -187,12 +189,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="input" style="">
-                            <p>Mã:</p> <form:input path="ma" class="form-control"/>
+                            <p>Mã:</p>
+                            <form:input path="ma" class="form-control"/>
                         </div>
                         <form:errors path="ma"/>
                         <div style="margin-left: 10px;color: red">${errorMa}</div>
                         <div class="input">
-                            <p>Loại giày:</p> <form:input path="tentheloai" class="form-control"/>
+                            <p>Loại giày:</p>
+                            <form:input path="tentheloai" class="form-control"/>
 
                         </div>
                         <form:errors path="tentheloai"/>
@@ -400,4 +404,5 @@
     </div>
 </div>
 <div class="text-center" style="color: crimson">${mess}</div>
+
 

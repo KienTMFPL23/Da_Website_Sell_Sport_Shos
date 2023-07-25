@@ -67,7 +67,7 @@
     }
 
     .form-label {
-        width: 100px;
+        width: 80px;
         background-color: #D9D9D9;
         font-family: Regular;
         font-weight: bold;
@@ -81,7 +81,6 @@
     }
 
     select {
-        margin-left: 30px;
         border: none;
     }
 
@@ -109,6 +108,7 @@
 
     }
 </style>
+
 <div class="container">
     <form:form modelAttribute="searchForm" cssClass="text-center" action="/quan-ly-san-pham/search">
         <div class="row">
@@ -118,59 +118,56 @@
             </div>
             <div class="col-3 col-md-3 col-sm-3" id="btnAdd">
                 <a href="/san-pham/hien-thi"/>
-                    <%--                        <i class="bi bi-plus-circle-fill"></i>--%>
                 <img src="../images/plus.png">
                 Thêm mới sản phẩm</a>
                 </br>
             </div>
         </div>
         </br>
-
-        <%--           <div class="row-select-one">--%>
-        <%--              <div>--%>
-        <%--                  <label class="form-label">Loại giầy: </label>--%>
-        <%--                  <form:select path="keyword" onchange="submit()">--%>
-        <%--                      <form:option value="">Tất cả</form:option>--%>
-        <%--                      <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>--%>
-        <%--                  </form:select>--%>
-        <%--              </div>--%>
-        <div>
-            <label class="form-label">Màu sắc: </label>
-            <form:select path="tenmau" onchange="submit()">
-                <form:option value="">Tất cả</form:option>
-                <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
-            </form:select>
+        <div class="row">
+            <div class="col-2 col-md-2 col-sm-2">
+                <label class="form-label">Loại giầy: </label>
+                <form:select path="" class="form-control" onchange="submit()">
+                    <form:option value="">Tất cả</form:option>
+                    <form:options items="${listLoaiGiay}" itemLabel="tentheloai" itemValue="id"/>
+                </form:select>
+            </div>
+           //mau
+            <div class="col-2 col-md-2 col-sm-2">
+                <label class="form-label">Màu sắc:</label>
+                <form:select path="tenmau" class="form-control" onchange="this.form.submit()">
+                    <form:option value="">Tất cả</form:option>
+                    <form:options items="${listMau}" itemLabel="ten" itemValue="id"/>
+                </form:select>
+            </div>
+            <div class="col-2 col-md-2 col-sm-2">
+                <label class="form-label">Chất liệu: </label>
+                <form:select path="" class="form-control" onchange="submit()">
+                    <form:option value="">Tất cả</form:option>
+                    <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>
+                </form:select>
+            </div>
+            <div class="col-2 col-md-2 col-sm-2">
+                <label class="form-label">Kích cỡ: </label>
+                <form:select path="" class="form-control" onchange="submit()">
+                    <form:option value="">Tất cả</form:option>
+                    <form:options items="${listKichCo}" itemLabel="size" itemValue="id"/>
+                </form:select>
+            </div>
+            <div class="col-2 col-md-2 col-sm-2">
+                <label class="form-label">Đế giày: </label>
+                <form:select path="" class="form-control" onchange="submit()">
+                    <form:option value="">Tất cả</form:option>
+                    <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>
+                </form:select>
+            </div>
         </div>
-        <%--               <div>--%>
-        <%--                   <label class="form-label">Chất liệu: </label>--%>
-        <%--                   <form:select path="keyword" onchange="submit()">--%>
-        <%--                       <form:option value="">Tất cả</form:option>--%>
-        <%--                       <form:options items="${listChatLieu}" itemLabel="ten" itemValue="id"/>--%>
-        <%--                   </form:select>--%>
-        <%--               </div>--%>
-        <%--           </div>--%>
-        <%--           <div class="row-select-second">--%>
-        <%--              <div>--%>
-        <%--                  <label class="form-label">Kích cỡ: </label>--%>
-        <%--                  <form:select path="keyword" onchange="submit()">--%>
-        <%--                      <form:option value="">Tất cả</form:option>--%>
-        <%--                      <form:options items="${listKichCo}" itemLabel="size" itemValue="id"/>--%>
-        <%--                  </form:select>--%>
-        <%--              </div>--%>
-        <%--              <div>--%>
-        <%--                  <label class="form-label">Đế giày: </label>--%>
-        <%--                  <form:select path="keyword" onchange="submit()">--%>
-        <%--                      <form:option value="">Tất cả</form:option>--%>
-        <%--                      <form:options items="${listDeGiay}" itemLabel="loaide" itemValue="id"/>--%>
-        <%--                  </form:select>--%>
-        <%--              </div>--%>
-        <%--           </div>--%>
-
     </form:form>
+
     </br>
     <form:form action="/quan-ly-san-pham/sort" modelAttribute="sortForm">
         <label class="form-label">Sắp xếp theo</label>
-        <form:select path="key" onchange="submit()">
+        <form:select path="key" onchange="submit()" class="form-control" cssStyle="width: 100px">
             <option value="0">---</option>
             <form:option value="dongia">Đơn giá</form:option>
             <form:option value="sl">Số lượng</form:option>
@@ -220,3 +217,8 @@
         </nav>
     </div>
 </div>
+<script>
+    function submitForm() {
+        document.getElementById('searchMauSac').submit();
+    }
+</script>

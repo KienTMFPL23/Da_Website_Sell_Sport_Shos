@@ -1,6 +1,9 @@
 package com.poly.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,35 +23,50 @@ public class ChiTietSanPham {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "Id")
     UUID id;
+
     @ManyToOne()
     @JoinColumn(name = "Idsp")
     SanPham sanPham;
+
     @ManyToOne()
     @JoinColumn(name = "Idmausac")
     MauSac mauSac;
+
     @ManyToOne()
     @JoinColumn(name = "Idtheloai")
     LoaiGiay loaiGiay;
+
     @ManyToOne()
     @JoinColumn(name = "Idkichco")
     KichCo kichCo;
+
     @ManyToOne()
     @JoinColumn(name = "Idchatlieu")
     ChatLieu chatLieu;
+
     @ManyToOne()
     @JoinColumn(name = "Iddegiay")
     DeGiay deGiay;
+
     @Column(name = "Dongia")
+//    @NotNull(message = "không để trống")
     Double donGia;
+
     @Column(name = "Soluong")
+//    @NotNull(message = "không để trống")
     Integer soLuong;
 
     @Column(name = "Hinhanh")
 //    @Transient
+//    @NotBlank(message = "không để trống")
     String hinhAnh;
+
     @Column(name = "Motact")
+//    @NotBlank(message = "không để trống")
     String moTaCT;
+
     @Column(name = "Trangthai")
+//    @NotNull(message = "không để trống")
     Integer trangThai;
 
     public void loadFromViewModel(QLSanPham vm)

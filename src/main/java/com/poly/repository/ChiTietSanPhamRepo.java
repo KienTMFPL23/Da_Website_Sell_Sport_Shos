@@ -1,6 +1,7 @@
 package com.poly.repository;
 
 import com.poly.entity.ChiTietSanPham;
+import com.poly.entity.MauSac;
 import com.poly.entity.QLSanPham;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,7 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
             "  FROM [dbo].[ChiTietSanPham]\n" +
             "  sp join SanPham s on s.Id=sp.IdSP\n" +
             "  join MauSac m on m.Id=sp.IdMauSac\n" +
-            "  Where s.TenSanPham like ?1 or m.TenMau like ?1 or s.MaSanPham like ?1\n" +
+            "  Where s.TenSanPham like %?1% or m.TenMau like %?2% \n" +
             "  group by sp.Id\n" +
             "      ,IdSP,s.TenSanPham\n" +
             "      ,IdMauSac\n" +
@@ -44,12 +45,14 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
             "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
             "\t  m.Id", nativeQuery = true)
 
+    Page<ChiTietSanPham> searchCTSP(String keyword, String tenmau, Pageable pageable);
+
+    @Query("SELECT ctsp FROM ChiTietSanPham  ctsp  where (?1 is null or ctsp.mauSac.ten LIKE ?1) ")
+    Page<ChiTietSanPham> searchMau(String tenmau, Pageable pageable);
 
 //    @Query("select ctsp from QLSanPham ctsp where  ctsp.sanPham.tenSP like ?1 or ctsp.sanPham.maSP ?1")
 //    QLSanPham findAllSPByKey(String keyword);
-
-    Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable);
-
+  
     @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.sanPham.tenSP =? 1")
     List<ChiTietSanPham> filterBySanPham(String tenSanPham);
     @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.mauSac.ten =? 1")
@@ -58,7 +61,5 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
     List<ChiTietSanPham> filterByKichCo(String size);
     @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.loaiGiay.tentheloai =? 1")
     List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
-
-    Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
 
 }
