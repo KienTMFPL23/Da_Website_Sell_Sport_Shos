@@ -87,6 +87,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
+
     public List<ChiTietSanPham> filterByTenSP(String tenSP) {
         return repo.filterBySanPham(tenSP);
     }
@@ -110,12 +111,21 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     public Integer getSoLuongSP(UUID id) {
         Integer soLuong = 0;
         ChiTietSanPham sanPham = repo.findById(id).orElse(null);
+
+    public Integer getSoLuongSP(UUID id) {
+        Integer soLuong = 0;
+        QLSanPham sanPham = repo.findById(id).orElse(null);
+
         soLuong = sanPham.getSoLuong();
         return soLuong;
     }
 
     @Override
+
     public ChiTietSanPham updateCTSP(ChiTietSanPham sanPham) {
+
+    public QLSanPham updateCTSP(QLSanPham sanPham) {
+
         return repo.save(sanPham);
     }
 

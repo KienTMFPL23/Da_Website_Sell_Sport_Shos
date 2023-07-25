@@ -44,6 +44,7 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
             "      ,sp.TrangThai,s.MaSanPham,m.TenMau,\n" +
             "\t  m.Id", nativeQuery = true)
 
+
 //    @Query("select ctsp from QLSanPham ctsp where  ctsp.sanPham.tenSP like ?1 or ctsp.sanPham.maSP ?1")
 //    QLSanPham findAllSPByKey(String keyword);
 
@@ -57,4 +58,7 @@ public interface ChiTietSanPhamRepo extends JpaRepository<ChiTietSanPham, UUID> 
     List<ChiTietSanPham> filterByKichCo(String size);
     @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.loaiGiay.tentheloai =? 1")
     List<ChiTietSanPham> filterByLoaiGiay(String loaiGiay);
+
+    Page<QLSanPham> searchCTSP(String keyword, Pageable pageable);
+
 }
