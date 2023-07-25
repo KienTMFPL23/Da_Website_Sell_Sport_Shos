@@ -38,6 +38,6 @@ public class HoaDonChiTiet {
 
     ChiTietSanPham qlSanPham;
 
-    QLSanPham qlSanPham;
+//    QLSanPham qlSanPham;
 
 }
