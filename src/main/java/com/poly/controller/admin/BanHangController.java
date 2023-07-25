@@ -1,11 +1,8 @@
 package com.poly.controller.admin;
 
 
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+
+
 import com.poly.entity.*;
 import com.poly.service.ChiTietSPService;
 import com.poly.service.HoaDonChiTietService;
@@ -27,13 +24,13 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-
-import java.io.FileNotFoundException;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -43,7 +40,6 @@ import java.util.stream.Collectors;
 
 @Controller
 public class BanHangController {
-
     @Autowired
     SanPhamService sanPhamService;
 
@@ -91,10 +87,8 @@ public class BanHangController {
         List<HoaDon> listHoaDon = hoaDonService.dsHoaDon();
         model.addAttribute("listKhachHang", nguoiDungService.findAllKhachHang());
         model.addAttribute("listSP", ctspService.getList());
-        model.addAttribute("filterCTSP",new ChiTietSanPham());
 
-        List<HoaDon> listHoaDon = hoaDonService.dsHoaDon();
-        model.addAttribute("listSP", ctspService.getList());
+        model.addAttribute("filterCTSP", new ChiTietSanPham());
 
         model.addAttribute("listHoaDon", hoaDonService.dsHoaDon());
         model.addAttribute("dsHoaDonCT", dsHoaDonCT);
@@ -252,42 +246,15 @@ public class BanHangController {
         }
         return "redirect:/ban-hang/counter";
     }
-    @GetMapping("/ban-hang/filter-by-name")
-    public String filterSanPhamByName(Model model){
-        model.addAttribute("filter","/ban-hang/filter-by-name");
-        List<ChiTietSanPham> listSanPhamCT = ctspService.getList();
-        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
-                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
-                .collect(Collectors.toList());
-        model.addAttribute("filter",filterByName);
-        return "redirect:/ban-hang/counter";
-    }
-//    @GetMapping("/ban-hang/filte-by-mau")
-//    public String filterSanPhamByMau(Model model){
-//        List<ChiTietSanPham> filterByMau = listSanPhamCT.stream()
-//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getMauSac().getTen()))
-//                .collect(Collectors.toList());
-//        model.addAttribute("filter",filterByMau);
-//        return "redirect:/ban-hang/counter";
-//    }
-//    @GetMapping("/ban-hang/filter")
-//    public String filterSanPham(){
+
+//    @GetMapping("/ban-hang/filter-by-name")
+//    public String filterSanPhamByName(Model model) {
+//        model.addAttribute("filter", "/ban-hang/filter-by-name");
+//        List<ChiTietSanPham> listSanPhamCT = ctspService.getList();
 //        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
 //                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
 //                .collect(Collectors.toList());
-//        return "redirect:/ban-hang/counter";
-//    }
-//    @RequestMapping("/ban-hang/create-invoice")
-//    public String createInvoice() throws FileNotFoundException {
-//        String path = "invoice.pdf";
-//        PdfWriter pdfWriter = new PdfWriter(path);
-//        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-//        pdfDocument.setDefaultPageSize(PageSize.A5);
-//        Document document = new Document(pdfDocument);
-//
-//        document.add(new Paragraph("Hóa đơn mua hàng"));
-//
-//        document.close();
+//        model.addAttribute("filter", filterByName);
 //        return "redirect:/ban-hang/counter";
 //    }
 
