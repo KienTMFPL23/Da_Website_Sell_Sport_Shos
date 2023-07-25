@@ -1,24 +1,24 @@
 package com.poly.controller.admin;
 
+import com.google.zxing.WriterException;
 import com.poly.entity.*;
 import com.poly.repository.*;
 import com.poly.service.ChatLieuService;
 import com.poly.service.ChiTietSPService;
 import com.poly.service.KichCoService;
 import com.poly.service.SanPhamService;
+import com.poly.utils.QRCodeGenerator;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -28,11 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.util.*;
 
 @Controller
@@ -218,7 +214,7 @@ public class SanPhamController {
         return "redirect:/san-pham/hien-thi";
     }
 
-    //upload file
+    //view-add chi tiết sản phẩm
 
     @RequestMapping("/quan-ly-san-pham/view-add/{id}")
     public String viewAdd(@ModelAttribute("sanpham") QLSanPham sp, @PathVariable("id") UUID id, Model model) {
@@ -234,14 +230,13 @@ public class SanPhamController {
         return "/admin/index";
     }
 
+    // add ctsp
     @PostMapping("/quan-ly-san-pham/add/{id}")
     public String AddSanPham(Model model, @PathVariable("id") UUID id, @ModelAttribute("sanpham") QLSanPham sp
 
-            , BindingResult result) {
+            , BindingResult result) throws WriterException, IOException {
         SanPham sanPham1 = sanPhamService.getOne(id);
         sp.setSanPham(sanPham1);
-
-        //upload file:
 
         ChiTietSanPham ctsp = new ChiTietSanPham();
         ctsp.loadFromViewModel(sp);
@@ -262,10 +257,19 @@ public class SanPhamController {
         model.addAttribute("kichco", new KichCo());
         model.addAttribute("tensp", sanPham1.getTenSP());
         service.addKC(ctsp);
+
+        //generate code qr
+        List<ChiTietSanPham> qlSanPhams = service.getList();
+        if (qlSanPhams.size() != 0) {
+            for (ChiTietSanPham ct : qlSanPhams
+            ) {
+                QRCodeGenerator.generatorQRCode(ct);
+            }
+        }
         return "redirect:/admin/quan-ly-san-pham";
     }
 
-
+    //add modal loai giay
     @RequestMapping("/san-pham/loai-giay/add/{id}")
     public String save(Model model, @ModelAttribute("lg") LoaiGiay loaiGiay, @PathVariable("id") UUID id, BindingResult result) {
         Boolean hasE = result.hasErrors();

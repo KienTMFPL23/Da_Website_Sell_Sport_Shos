@@ -15,6 +15,7 @@ public interface ChiTietSPService {
     void addKC(ChiTietSanPham qlSanPham);
     void deleteSP(UUID id);
     ChiTietSanPham getOne(UUID id);
-    Page<ChiTietSanPham> searchCTSP(String keyword,Pageable pageable);
+    Page<ChiTietSanPham> searchCTSP(String keyword,String tenmau,Pageable pageable);
+    Page<ChiTietSanPham> searchMau(String tenmau,Pageable pageable);
 
 }
