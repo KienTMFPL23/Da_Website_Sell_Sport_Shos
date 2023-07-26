@@ -60,7 +60,7 @@
     .content {
         float: right;
         color: white;
-        font-size: 13px;
+        font-size: 16px;
     }
     /* Tab Links */
     .tabs{
@@ -236,6 +236,7 @@
                         <option>NV003</option>
                     </select>
                 </div>
+                <button>Tìm kiếm</button>
             </div>
             banchaynhat
         </div>
@@ -264,6 +265,7 @@
                         <option>NV003</option>
                     </select>
                 </div>
+                <button>Tìm kiếm</button>
             </div>
             khách mua hàng
         </div>
@@ -291,6 +293,7 @@
                         <option>NV003</option>
                     </select>
                 </div>
+                <button>Tìm kiếm</button>
             </div>
             khách hàng tiềm năng
         </div>
@@ -318,6 +321,7 @@
                         <option>NV003</option>
                     </select>
                 </div>
+                <button>Tìm kiếm</button>
             </div>
             bán kém nhất
         </div>
