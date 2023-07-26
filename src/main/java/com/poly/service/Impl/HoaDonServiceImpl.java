@@ -4,6 +4,8 @@ import com.poly.entity.HoaDon;
 import com.poly.repository.HoaDonRepo;
 import com.poly.service.HoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,4 +40,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     public HoaDon findHoaDon(UUID id) {
         return hoaDonRepo.findHoaDon(id);
     }
+
+    @Override
+    public Page<HoaDon> allListHoaDon(Pageable pageable) {
+        return hoaDonRepo.AllHoaDon(pageable);
+    }
+
+
 }
