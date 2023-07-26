@@ -220,21 +220,6 @@ public class BanHangController {
         return "redirect:/ban-hang/counter";
     }
 
-    //    @GetMapping("/ban-hang/filte-by-mau")
-//    public String filterSanPhamByMau(Model model){
-//        List<ChiTietSanPham> filterByMau = listSanPhamCT.stream()
-//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getMauSac().getTen()))
-//                .collect(Collectors.toList());
-//        model.addAttribute("filter",filterByMau);
-//        return "redirect:/ban-hang/counter";
-//    }
-//    @GetMapping("/ban-hang/filter")
-//    public String filterSanPham(){
-//        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
-//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
-//                .collect(Collectors.toList());
-//        return "redirect:/ban-hang/counter";
-//    }
     @RequestMapping("/ban-hang/create-invoice")
     public String createInvoice() throws FileNotFoundException {
         String path = "invoice.pdf";
