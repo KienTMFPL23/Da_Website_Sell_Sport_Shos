@@ -94,6 +94,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-ambulance"></i></div>
                         Quản lý đơn hàng
                     </a>
+                    <a class="nav-link" href="/hoa-don/hien-thi">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                        Quản lý Hóa đơn
+                    </a>
                     <a class="nav-link" href="/ban-hang/counter">
                         <div class="sb-nav-link-icon"><i class="fas fa-cart-plus"></i></div>
                         Bán hàng tại quầy

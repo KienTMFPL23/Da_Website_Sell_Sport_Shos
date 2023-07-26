@@ -17,30 +17,24 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" style="margin-top: 10px">
   <form th:action="/hoa-don/hien-thi">
       <div class="row">
-
           <div class="col-lg-3">
               <label>Mã Hóa đơn</label>
-
               <div class="col">
-                  <input type="text" class="form-control" placeholder="Nhập tên hoặc mã cần tìm" name="maHD"
+                  <input type="text" placeholder="Nhập mã cần tìm" name="maHD"
                          value="${mahd}" >
               </div>
-
           </div>
-
 
           <div class="col-lg-3">
               <label>Tên Khách Hàng</label>
               <div class="col">
-                  <input type="text" class="form-control" placeholder="Nhập tên hoặc mã cần tìm" name="tenNguoiNhan"
+                  <input type="text" placeholder="Nhập tên cần tìm" name="tenNguoiNhan"
                          value="${tenNguoiNhan}" >
               </div>
           </div>
-
-
           <div class="col-lg-3">
               <label>Ngày Bắt đầu</label>
               <div class="col">
@@ -53,18 +47,17 @@
                   <input type="date" name="ngayKet" value="${ngayThanhToan}"/>
               </div>
           </div>
-
       </div>
-      <button type="submit">Search </button>
-      <button type="button" class="btn btn-primary" value="clear" onclick="clearFilter()">clear</button>
+      <button type="button" class="btn btn-primary" style="margin-top: 15px">Search</button>
+      <button type="button" class="btn btn-primary" value="clear" onclick="clearFilter()" style="margin-top: 15px">clear</button>
 
   </form>
 </div>
-<div class="container">
+<div class="container" style="margin-top: 15px">
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-striped">
-                <thead>
+                <thead class="table table-primary">
                 <tr>
                     <th scope="col">STT</th>
                     <th scope="col">Mã HĐ</th>

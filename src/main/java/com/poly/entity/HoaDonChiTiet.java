@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -33,11 +32,13 @@ public class HoaDonChiTiet {
     @ManyToOne
     @JoinColumn(name = "IdHoaDon")
     HoaDon hoaDon;
+
     @ManyToOne
     @JoinColumn(name = "IdChiTietSP")
 
     ChiTietSanPham qlSanPham;
 
 //    QLSanPham qlSanPham;
+
 
 }
