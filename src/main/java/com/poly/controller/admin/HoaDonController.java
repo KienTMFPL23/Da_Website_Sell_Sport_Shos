@@ -63,6 +63,7 @@ public class HoaDonController {
                 model.addAttribute("hd", pgg);
             }
         }
-        return "quan_li_hoa_don/index";
+        model.addAttribute("view", "../quan_li_hoa_don/index.jsp");
+        return "admin/index";
     }
 }

@@ -48,4 +48,5 @@ public class HoaDon {
     @JoinColumn(name = "IdND")
     private NguoiDung nguoiDung;
 
+
 }
