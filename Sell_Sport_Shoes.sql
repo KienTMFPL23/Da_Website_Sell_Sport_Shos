@@ -113,7 +113,7 @@ CREATE TABLE HoaDon(
     NgayTao  DATE,
     NgayThanhToan  DATE,
     DiaChiShip   NVARCHAR(255),
-    SoDienThoai  VARCHAR(15) UNIQUE,
+    SoDienThoai  VARCHAR(15),
     TenNguoiNhan    NVARCHAR(100),
     TrangThai INT
 )
@@ -149,3 +149,9 @@ CREATE TABLE GioHangChiTiet(
     DonGiaKhiGiam MONEY
 )
 
+select * from HoaDon
+select * from HoaDonChiTiet
+select * from NguoiDung
+select * from TaiKhoan
+
+select * from NguoiDung where IdTaiKhoan
