@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -33,4 +34,6 @@ public class MauSac {
     @Column(name = "TrangThai")
     private Integer tt;
 
+    @OneToMany(mappedBy = "mauSac")
+    private List<ChiTietSanPham> danhSachChiTietSanPham;
 }
