@@ -63,8 +63,6 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public ChiTietSanPham findCTSPByKey(String keyword) {
 
-
-
         return sanPhamRepo.findCTSPByKey(keyword);
     }
 }

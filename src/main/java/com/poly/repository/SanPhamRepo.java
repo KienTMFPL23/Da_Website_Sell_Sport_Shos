@@ -34,7 +34,5 @@ public interface SanPhamRepo extends JpaRepository<SanPham, UUID> {
     @Query("select ctsp from ChiTietSanPham  ctsp where  ctsp.sanPham.tenSP like  ?1 or ctsp.sanPham.maSP like ?1")
     ChiTietSanPham findCTSPByKey(String keyword);
 
-    @Query("select ctsp from QLSanPham  ctsp where  ctsp.sanPham.tenSP like  ?1 or ctsp.sanPham.maSP like ?1")
-    QLSanPham findCTSPByKey(String keyword);
 
 }

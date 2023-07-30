@@ -24,6 +24,5 @@ public interface SanPhamService {
 
     ChiTietSanPham findCTSPByKey(String keyword);
 
-    QLSanPham findCTSPByKey(String keyword);
 
 }
