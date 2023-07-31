@@ -14,4 +14,15 @@ public class HomeController {
         return "home/index";
     }
 
+    @RequestMapping("/home/detail")
+    public String detail(){
+        return "home/single";
+    }
+
+    @RequestMapping("/home/category")
+    public String category(){
+        return "home/category";
+    }
+
+
 }
