@@ -35,13 +35,40 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     public Page<ChiTietSanPham> getListSP(Pageable pageable) {
         return repo.findAll(pageable);
     }
+
     @Override
     public void addKC(ChiTietSanPham qlSanPham) {
         repo.save(qlSanPham);
     }
+
     @Override
     public void deleteSP(UUID id) {
         repo.deleteById(id);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> searchByMau(UUID idMau, Pageable pageable) {
+        return repo.searchByMau(idMau, pageable);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> searchKichCo(UUID idKC, Pageable pageable) {
+        return repo.searchByKichCo(idKC, pageable);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> searchDeGiay(UUID idDe, Pageable pageable) {
+        return repo.searchByDeGiay(idDe, pageable);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> searchCL(UUID idCL, Pageable pageable) {
+        return repo.searchByChatLieu(idCL, pageable);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> searchLoaiGiay(UUID idLG, Pageable pageable) {
+        return repo.searchByLG(idLG, pageable);
     }
 
     @Override
@@ -50,17 +77,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     }
 
     @Override
-    public Page<ChiTietSanPham> searchCTSP(String keyword,String tenmau, Pageable pageable) {
-        return repo.searchCTSP(keyword,tenmau, pageable);
+    public Page<ChiTietSanPham> searchCTSP(String keyword, Pageable pageable) {
+        return repo.searchCTSP(keyword, pageable);
     }
-
-    @Override
-
-    public Page<ChiTietSanPham> searchMau(String tenmau, Pageable pageable) {
-        return repo.searchMau(tenmau,pageable);
-    }
-
-
 
     public List<ChiTietSanPham> filterByTenSP(String tenSP) {
         return repo.filterBySanPham(tenSP);
@@ -93,7 +112,6 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
         ChiTietSanPham sanPham = repo.findById(id).orElse(null);
 
 
-
         soLuong = sanPham.getSoLuong();
         return soLuong;
     }
@@ -101,7 +119,6 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSPService {
     @Override
 
     public ChiTietSanPham updateCTSP(ChiTietSanPham sanPham) {
-
 
 
         return repo.save(sanPham);
