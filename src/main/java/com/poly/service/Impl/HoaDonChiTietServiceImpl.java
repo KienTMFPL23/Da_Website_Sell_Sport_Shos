@@ -1,12 +1,15 @@
 package com.poly.service.Impl;
 
+import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.HoaDon;
 import com.poly.entity.HoaDonChiTiet;
 import com.poly.entity.QLSanPham;
-import com.poly.entity.SanPham;
+import com.poly.repository.ChiTietSanPhamRepo;
 import com.poly.repository.HoaDonChiTietRepo;
+import com.poly.repository.HoaDonRepo;
 import com.poly.service.ChiTietSPService;
 import com.poly.service.HoaDonChiTietService;
+import com.poly.service.HoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +22,9 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
     @Autowired
     HoaDonChiTietRepo hoaDonChiTietRepo;
     @Autowired
-    ChiTietSPService ctspService;
-
-    private List<HoaDonChiTiet> dsHoaDonCT = new ArrayList<>();
+    ChiTietSanPhamRepo ctspRepo;
+    @Autowired
+    HoaDonRepo hoaDonRepo;
 
     @Override
     public List<HoaDonChiTiet> findAllById(UUID id) {
@@ -34,29 +37,28 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
     }
 
     @Override
-    public HoaDonChiTiet saveHDCT(HoaDonChiTiet hoaDon) {
+    public HoaDonChiTiet saveHDCT(HoaDonChiTiet hoaDon,UUID id,UUID idHD) {
+        List<HoaDonChiTiet> list = hoaDonChiTietRepo.findAllById(idHD);
+        HoaDonChiTiet item = list
+                .stream()
+                .filter(p -> p.getQlSanPham().getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (item != null){
+            item.setSoLuong(item.getSoLuong() + 1);
+            return item;
+        }
         return hoaDonChiTietRepo.save(hoaDon);
     }
 
     @Override
-    public void updateSoLuong(List<QLSanPham> dsSanPham,QLSanPham ctsp) {
-        for (QLSanPham sp : dsSanPham){
-            if (sp.getId().equals(ctsp.getId())){
-                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
-
-            }
-        }
+    public HoaDonChiTiet updateHDCT(HoaDonChiTiet hoaDon) {
+        return hoaDonChiTietRepo.save(hoaDon);
     }
 
     @Override
     public HoaDonChiTiet getOne(UUID id) {
         return hoaDonChiTietRepo.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<QLSanPham> findSanPhamInHoaDon(UUID id) {
-        List<QLSanPham> sanPham = hoaDonChiTietRepo.findSanPhamInHoaDon(id);
-        return sanPham;
     }
 
     @Override
@@ -69,9 +71,10 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
     }
 
     @Override
-    public void clear() {
-        dsHoaDonCT.clear();
+    public HoaDonChiTiet getHoaDonChiTiet(UUID id) {
+        return hoaDonChiTietRepo.getHoaDonChiTiet(id);
     }
+
 
     @Override
     public List<HoaDonChiTiet> saveAllHDCT(List<HoaDonChiTiet> list) {
@@ -80,11 +83,6 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService {
 
     @Override
     public void deleteHoaDonChiTiet(UUID id) {
-        hoaDonChiTietRepo.deleteById(id);
-    }
-
-    @Override
-    public void removeByIdHOaDon(UUID id) {
         hoaDonChiTietRepo.deleteById(id);
     }
 
