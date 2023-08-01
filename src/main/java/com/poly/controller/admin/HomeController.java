@@ -24,5 +24,10 @@ public class HomeController {
         return "home/category";
     }
 
+    @RequestMapping("/home/cart")
+    public String cart() {
+        return "home/cart";
+    }
+
 
 }
