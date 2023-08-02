@@ -17,6 +17,13 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class QRCodeGenerator {
+
+//     public static void generatorQRCode(ChiTietSanPham sp) throws WriterException, IOException {
+//         //generate code:
+//         String qrCodePath = "C:\\Users\\NamNguyenTien\\Desktop\\QRCode\\";
+//         String qrCodeName = qrCodePath + sp.getId() + "-QRCODE.png";
+//         var qrCodeWriter = new QRCodeWriter();
+
     //    public static void generatorQRCode(ChiTietSanPham sp) throws WriterException, IOException {
 //        //generate code:
 //        String qrCodePath = "C:\\Users\\Admin\\Desktop\\QRCode\\";
@@ -37,6 +44,7 @@ public class QRCodeGenerator {
     public static void generatorQRCode(ChiTietSanPham sp, String outputFolderPath) throws WriterException, IOException {
         // Generate code:
         String qrCodeData = "ID: " + sp.getId();
+
 
         // Configure UTF-8 encoding
         Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);

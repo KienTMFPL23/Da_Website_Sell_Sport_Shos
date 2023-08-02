@@ -317,6 +317,8 @@
 <!-- Cart End -->
 
 
+<button class="btn btn-block btn-primary my-3 py-3" style="width: 200px;margin-left: 800px;font-size: 25px;">Buy</button>
+
 <!-- Newsletter -->
 
 <div class="newsletter">

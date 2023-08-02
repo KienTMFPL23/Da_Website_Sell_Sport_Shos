@@ -322,7 +322,7 @@ public class QuanLySanPhamController {
         return "/admin/index";
     }
 
-    private String fileUpload = "C:\\Users\\Admin\\Desktop\\Da_Website_Sell_Sport_Shos\\src\\main\\resources\\static\\image\\";
+    private String fileUpload = "C:\\Users\\NamNguyenTien\\Desktop\\Da_Website_Sell_Sport_Shos\\src\\main\\resources\\static\\image\\";
 
     @RequestMapping("/quan-ly-san-pham/update/{id}")
     public String updateKC(Model model, @ModelAttribute("sanpham") QLSanPham qlSanPham, BindingResult result) throws IOException, WriterException {
