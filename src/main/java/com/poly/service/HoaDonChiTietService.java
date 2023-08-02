@@ -1,5 +1,6 @@
 package com.poly.service;
 
+import com.poly.entity.ChiTietSanPham;
 import com.poly.entity.HoaDon;
 import com.poly.entity.HoaDonChiTiet;
 import com.poly.entity.QLSanPham;
@@ -12,11 +13,9 @@ public interface HoaDonChiTietService {
     List<HoaDonChiTiet> findALl();
     List<HoaDonChiTiet> saveAllHDCT(List<HoaDonChiTiet> list);
     void deleteHoaDonChiTiet(UUID id);
-    void removeByIdHOaDon(UUID id);
-    HoaDonChiTiet saveHDCT(HoaDonChiTiet hoaDon);
-    void updateSoLuong(List<QLSanPham> list,QLSanPham sanPham);
+    HoaDonChiTiet saveHDCT(HoaDonChiTiet hoaDon,UUID id,UUID idHD);
+    HoaDonChiTiet updateHDCT(HoaDonChiTiet hoaDon);
     HoaDonChiTiet getOne(UUID id);
-    List<QLSanPham> findSanPhamInHoaDon(UUID id);
     Double getTotal(List<HoaDonChiTiet> list);
-    void clear();
+    HoaDonChiTiet getHoaDonChiTiet(UUID id);
 }

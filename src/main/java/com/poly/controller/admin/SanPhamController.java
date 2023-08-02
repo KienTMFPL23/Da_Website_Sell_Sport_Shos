@@ -260,13 +260,19 @@ public class SanPhamController {
         service.addKC(ctsp);
 
         //generate code qr
-        List<ChiTietSanPham> qlSanPhams = service.getList();
-        if (qlSanPhams.size() != 0) {
-            for (ChiTietSanPham ct : qlSanPhams
-            ) {
-                QRCodeGenerator.generatorQRCode(ct);
-            }
-        }
+        String documentsPath = System.getProperty("user.home") + File.separator + "Documents";
+        String qrCodeFolderPath = documentsPath + File.separator + "QRCode";
+        new File(qrCodeFolderPath).mkdirs(); // Tạo thư mục "QRCode" nếu chưa tồn tại
+
+        // Lưu QR code vào thư mục "QRCode" trong "Documents"
+        QRCodeGenerator.generatorQRCode(ctsp, qrCodeFolderPath);
+//        List<ChiTietSanPham> qlSanPhams = service.getList();
+//        if (qlSanPhams.size() != 0) {
+//            for (ChiTietSanPham ct : qlSanPhams
+//            ) {
+//                QRCodeGenerator.generatorQRCode(ct);
+//            }
+//        }
         return "redirect:/admin/quan-ly-san-pham";
     }
 

@@ -4,7 +4,9 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.poly.entity.*;
 import com.poly.service.ChiTietSPService;
 import com.poly.service.HoaDonChiTietService;
@@ -71,7 +73,7 @@ public class BanHangController {
         List<HoaDon> listHoaDon = hoaDonService.dsHoaDon();
         model.addAttribute("listKhachHang", nguoiDungService.findAllKhachHang());
         model.addAttribute("listSP", ctspService.getList());
-        model.addAttribute("filterCTSP",new ChiTietSanPham());
+        model.addAttribute("filterCTSP", new ChiTietSanPham());
         model.addAttribute("listHoaDon", hoaDonService.dsHoaDon());
         model.addAttribute("dsHoaDonCT", dsHoaDonCT);
         model.addAttribute("hoaDon", new HoaDon());
@@ -112,7 +114,6 @@ public class BanHangController {
     @RequestMapping("/ban-hang/remove/{Id}")
     public String removeHoaDon(Model model, @PathVariable("Id") UUID id) {
         model.addAttribute("view", "../ban_hang_tai_quay/ban-hang.jsp");
-//        hoaDonChiTietService.removeByIdHOaDon(id);
         hoaDonService.removeHoaDon(id);
         return "redirect:/ban-hang/counter";
     }
@@ -136,7 +137,7 @@ public class BanHangController {
 //        Integer soLuongTon = ctspService.getSoLuongSP(id);
         if (hoaDonChiTiet != null) {
             hoaDonChiTiet.setSoLuong(soLuong);
-            hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
+            hoaDonChiTietService.updateHDCT(hoaDonChiTiet);
         }
         return "redirect:/ban-hang/hoadonchitiet/" + idHoaDonCT;
     }
@@ -160,13 +161,12 @@ public class BanHangController {
         ChiTietSanPham sanPham = sanPhamService.findCTSPByKey("" + searchForm.keyword + "");
         HoaDon hoaDon = hoaDonService.findHoaDon(idHoaDon);
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-        List<HoaDonChiTiet> listHoaDonCT = hoaDonChiTietService.findAllById(idHoaDon);
         if (sanPham != null) {
             hoaDonChiTiet.setHoaDon(hoaDon);
             hoaDonChiTiet.setQlSanPham(sanPham);
             hoaDonChiTiet.setSoLuong(1);
             hoaDonChiTiet.setDonGia(sanPham.getDonGia());
-            hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
+            hoaDonChiTietService.saveHDCT(hoaDonChiTiet, sanPham.getId(),this.idHoaDon);
         }
         soLuongTon = sanPham.getSoLuong() - 1;
         sanPham.setSoLuong(soLuongTon);
@@ -185,12 +185,11 @@ public class BanHangController {
             hoaDonChiTiet.setQlSanPham(ctsp);
             hoaDonChiTiet.setSoLuong(1);
             hoaDonChiTiet.setDonGia(ctsp.getDonGia());
-            hoaDonChiTietService.saveHDCT(hoaDonChiTiet);
+            hoaDonChiTietService.saveHDCT(hoaDonChiTiet, ctsp.getId(),this.idHoaDon);
             soLuongTon = ctsp.getSoLuong() - 1;
             ctsp.setSoLuong(soLuongTon);
             ctspService.updateCTSP(ctsp);
         }
-
         return "redirect:/ban-hang/hoadonchitiet/" + idHoaDonCT;
     }
 
@@ -210,31 +209,18 @@ public class BanHangController {
         }
         return "redirect:/ban-hang/counter";
     }
+
     @GetMapping("/ban-hang/filter-by-name")
-    public String filterSanPhamByName(Model model){
-        model.addAttribute("filter","/ban-hang/filter-by-name");
+    public String filterSanPhamByName(Model model) {
+        model.addAttribute("filter", "/ban-hang/filter-by-name");
         List<ChiTietSanPham> listSanPhamCT = ctspService.getList();
         List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
                 .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
                 .collect(Collectors.toList());
-        model.addAttribute("filter",filterByName);
+        model.addAttribute("filter", filterByName);
         return "redirect:/ban-hang/counter";
     }
-    //    @GetMapping("/ban-hang/filte-by-mau")
-//    public String filterSanPhamByMau(Model model){
-//        List<ChiTietSanPham> filterByMau = listSanPhamCT.stream()
-//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getMauSac().getTen()))
-//                .collect(Collectors.toList());
-//        model.addAttribute("filter",filterByMau);
-//        return "redirect:/ban-hang/counter";
-//    }
-//    @GetMapping("/ban-hang/filter")
-//    public String filterSanPham(){
-//        List<ChiTietSanPham> filterByName = listSanPhamCT.stream()
-//                .filter(ctsp -> Boolean.parseBoolean(ctsp.getSanPham().getTenSP()))
-//                .collect(Collectors.toList());
-//        return "redirect:/ban-hang/counter";
-//    }
+
     @RequestMapping("/ban-hang/create-invoice")
     public String createInvoice() throws FileNotFoundException {
         String path = "invoice.pdf";
@@ -242,10 +228,30 @@ public class BanHangController {
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A5);
         Document document = new Document(pdfDocument);
+        float twocol = 285f;
+        float twocol150 = twocol + 150f;
+        float twoColumnWith[] = {twocol150, twocol};
+
+        Table table = new Table(twoColumnWith);
+        table.addCell(new Cell().add("Hóa đơn mua hàng"));
+
 
         document.add(new Paragraph("Hóa đơn mua hàng"));
 
         document.close();
+        return "redirect:/ban-hang/counter";
+    }
+
+    @RequestMapping("/ban-hang/scan-qr")
+    public String ScanQrCode(Model model, @RequestParam("idCTSP") UUID id) {
+        model.addAttribute("view", "../ban_hang_tai_quay/ban-hang.jsp");
+        ctsp = ctspService.getOne(id);
+        HoaDon hoaDon = hoaDonService.findHoaDon(idHoaDon);
+        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+        System.out.println("hello");
+        soLuongTon = ctsp.getSoLuong() - 1;
+        ctsp.setSoLuong(soLuongTon);
+        ctspService.updateCTSP(ctsp);
         return "redirect:/ban-hang/counter";
     }
 }
