@@ -42,9 +42,12 @@ public class LoginController {
         TaiKhoan accountFromDB = taiKhoanRepo.findByUsernameAndPassword(taikhoan.getUsername(),
                 taikhoan.getPassword());
 
-        if (accountFromDB != null) {
+        if (accountFromDB != null && accountFromDB.getRole() == true) {
             session.setAttribute("userLogged", accountFromDB);
             return "redirect:/admin/dashboard";
+        } else if (accountFromDB != null && accountFromDB.getRole() == false) {
+            session.setAttribute("userLogged", accountFromDB);
+            return "redirect:/optimus/home";
         }
 
         // Login false

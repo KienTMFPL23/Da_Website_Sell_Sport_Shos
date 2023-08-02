@@ -18,7 +18,7 @@ import java.util.Map;
 public class QRCodeGenerator {
     public static void generatorQRCode(ChiTietSanPham sp) throws WriterException, IOException {
         //generate code:
-        String qrCodePath = "C:\\Users\\Admin\\Desktop\\QRCode\\";
+        String qrCodePath = "C:\\Users\\NamNguyenTien\\Desktop\\QRCode\\";
         String qrCodeName = qrCodePath + sp.getId() + "-QRCODE.png";
         var qrCodeWriter = new QRCodeWriter();
 
